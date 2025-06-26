@@ -1,0 +1,6 @@
+__pycache__/*
+armips/*
+data/*
+include/*
+scripts/*
+gitignore

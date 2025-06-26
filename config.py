@@ -1,6 +1,6 @@
 class Config:
     INPUT_DIR = "csv"
-    ROOT_DIR = "../"
+    ROOT_DIR = "../hg-engine/"
     OUTPUT_FILE = ROOT_DIR + "armips/data/trainers/trainers.s"
 
     INCLUDE_DIR = ROOT_DIR + "include/"
