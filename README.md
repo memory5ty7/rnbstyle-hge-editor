@@ -2,20 +2,29 @@
 ## About
 An easy-to-master and fast tool to edit hg-engine trainers using spreadsheets.
 
+![Sample Team](png/Sample%20Team.PNG)
+
+## Requirements
+
+- hg-engine
+- Python 3.10 or higher
+
 ## Installation
 
 1. Install hg-engine by following the [installation instructions](https://github.com/BluRosie/hg-engine?tab=readme-ov-file#setup-instructions-linux-with-apt).
 
-2. Clone this repository in the hg-engine folder
+2. In the same directory where you cloned hg-engine, clone rnbstyle-hge-editor.
 - ```git clone https://github.com/Memory5ty7/rnbstyle-hge-editor.git```
+
+You should now have ```folder/hg-engine``` and ```folder/rnbstyle-hge-editor```
 
 3. Create a copy of the [Run and Bun-Style sample sheet](https://docs.google.com/spreadsheets/d/1QQ9A7cZD-ivIZ9QNOgbUV2toyaC7QJ42lxEYZk_odos/edit?usp=sharing) on your Google Drive account.
 
-4. Customize the trainers however you want following the Instructions.
+4. Customize the trainers however you want following the [Editing Instructions](Instructions.md)
 
-5. Once the modifications are done, download the Sheet you want as a .csv and place it in the csv subfolder of rnbstyle-hge-editor.
+5. Once the modifications are done, download the Sheet you want as a .csv and place it in the [csv subfolder](csv) of rnbstyle-hge-editor.
 
-6. Launch main.py to transfer the changes to the assembly file used by hg-engine
+6. Run [main.py](main.py) to transfer the changes to the assembly file used by hg-engine
 
 7. Build your ROM using hg-engine, the modified trainers are now in the game.
 
@@ -50,6 +59,11 @@ This tool supports every trainer customization parameter included in hg-engine :
 ## Configure
 
 Configure the tool via the [Config file](config.py).
+
+## Contributions
+
+If you want to contribute to this project, feel free to open a Pull Request.
+Every contribution is welcome !
 
 # Credits
 

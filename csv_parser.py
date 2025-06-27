@@ -1,4 +1,4 @@
-from resolve import ResolvePokemon
+from resolve import ResolvePokemon, ResolveItemForm
 import re
 from trainer import TrainerData, TrainerMon
 from typing import List
@@ -14,18 +14,22 @@ def parse_csv(rows):
         if not row or len(row) < 2:
             continue
         key = row[0].strip()
-        value = row[1:7]
+
+        if key.startswith("Name - "):
+            trainers.append(current)
+            current = TrainerData()
+
+            if (Config.USE_IV_EV == True):
+                current.trainermontype.append("TRAINER_DATA_TYPE_IV_EV_SET")
+
+            current.id = key.rsplit(" ", 1)[1]
+            if not current.id.isdigit():
+                current.id = 0
+
+            current.name = re.sub(r"^.*?\b(\w+)\s*(?:\[.*\])?$", r"\1", row[1])
+            continue
 
         match key:
-            case "Name":
-                trainers.append(current)
-                current = TrainerData()
-
-                if (Config.DEFAULT_IV_EV_CONFIG == True):
-                    current.trainermontype.append("TRAINER_DATA_TYPE_IV_EV_SET")
-
-                current.id = 0
-                current.name = re.sub(r"^.*?\b(\w+)\s*(?:\[.*\])?$", r"\1", row[1])
             case "DV":
                 for j, cell in enumerate(row[1:]):
                     current.party[j].dv = cell
@@ -46,6 +50,7 @@ def parse_csv(rows):
             case "Held Item":
                 for j, cell in enumerate(row[1:]):
                     current.party[j].item = cell
+                    current.party[j].pokemon, current.party[j].item = ResolveItemForm(current.party[j].pokemon, current.party[j].item)
                 current.trainermontype.append("TRAINER_DATA_TYPE_ITEMS")
             case "Moves":
                 for k in range(4):

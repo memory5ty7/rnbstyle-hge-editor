@@ -1,7 +1,50 @@
 def ResolvePokemon(cell):
     pokemon = (cell, 0)
 
+    speciesReplacement = {
+        "Nidoran♂" : ("Nidoran M", 0),
+        "Nidoran♀" : ("Nidoran F", 0),
+        "Ho-oh" : ("Ho Oh", 0),
+        "Farfetch'd" : ("Farfetchd", 0),
+        "Mr. Mime" : ("Mr Mime", 0),
+        "Mime Jr." : ("Mime Jr", 0),
+        "Porygon-Z" : ("Porygon Z", 0),
+        "Flabébé" : ("Flabebe", 0),
+        "Type: Null" : ("Type Null", 0),
+        "Jangmo-o" : ("Jangmo O", 0),
+        "Hakamo-o" : ("Hakamo O", 0),
+        "Kommo-o" : ("Kommo O", 0),
+        "Sirfetch'd" : ("Sirfetchd", 0),
+        "Mr. Rime" : ("Mr Rime", 0),
+        "Wo-Chien" : ("Wo Chien", 0),
+        "Chien-Pao" : ("Chien Pao", 0),
+        "Ting-Lu" : ("Ting Lu", 0),
+        "Chi-Yu" : ("Chi Yu", 0),
+    }
+
+    pokemon = speciesReplacement.get(cell, pokemon)
+
     forms = {
+        "Pikachu-Cosplay" : ("Pikachu", 1),
+        "Pikachu-Rockstar" : ("Pikachu", 2),
+        "Pikachu-Belle" : ("Pikachu", 3),
+        "Pikachu-Popstar" : ("Pikachu", 4),
+        "Pikachu-PhD" : ("Pikachu", 5),
+        "Pikachu-Libre" : ("Pikachu", 6),
+        "Pikachu-Original" : ("Pikachu", 7),
+        "Pikachu-Hoenn" : ("Pikachu", 8),
+        "Pikachu-Sinnoh" : ("Pikachu", 9),
+        "Pikachu-Unova" : ("Pikachu", 10),
+        "Pikachu-Kalos" : ("Pikachu", 11),
+        "Pikachu-Alola" : ("Pikachu", 12),
+        "Pikachu-Partner" : ("Pikachu", 13),
+        "Pikachu-World" : ("Pikachu", 14),
+        "Pikachu-Partner" : ("Pikachu", 15),
+
+        "Castform-Sunny" : ("Castform", 1),
+        "Castform-Rainy" : ("Castform", 2),
+        "Castform-Snowy" : ("Castform", 3),
+
         "Deoxys-A" : ("Deoxys", 1),
         "Deoxys-D" : ("Deoxys", 2),
         "Deoxys-S" : ("Deoxys", 3),
@@ -14,6 +57,64 @@ def ResolvePokemon(cell):
         "Rotom-Mow" : ("Rotom", 5),
         "Giratina-O" : ("Giratina", 1),
         "Shaymin-S" : ("Shaymin", 1),
+
+        "Shellos-E" : ("Shellos", 1),
+        "Gastrodon-E" : ("Gastrodon", 1),
+        "Cherrim-Sunshine" : ("Cherrim", 1),
+
+        "Dialga-O" : ("Dialga", 1),
+        "Palkia-O" : ("Palkia", 1),
+
+        "Deerling-Summer" : ("Deerling", 1),
+        "Deerling-Autumn" : ("Deerling", 2),
+        "Deerling-Winter" : ("Deerling", 3),
+        "Sawsbuck-Summer" : ("Sawsbuck", 1),
+        "Sawsbuck-Autumn" : ("Sawsbuck", 2),
+        "Sawsbuck-Winter" : ("Sawsbuck", 3),
+        "Tornadus-T" : ("Tornadus", 1),
+        "Thundurus-T" : ("Thundurus", 1),
+        "Landorus-T" : ("Landorus", 1),
+        "Kyurem-W" : ("Kyurem", 1),
+        "Kyurem-B" : ("Kyurem", 2),
+        "Keldeo-R" : ("Keldeo", 1),
+        "Meloetta-P" : ("Meloetta", 1),
+        "Genesect-D" : ("Genesect", 1),
+        "Genesect-S" : ("Genesect", 2),
+        "Genesect-B" : ("Genesect", 3),
+        "Genesect-C" : ("Genesect", 4),
+
+        "Greninja-Ash" : ("Greninja", 2),
+        "Furfrou-Heart" : ("Furfrou", 1),
+        "Furfrou-Star" : ("Furfrou", 2),
+        "Furfrou-Diamond" : ("Furfrou", 3),
+        "Furfrou-Debutante" : ("Furfrou", 4),
+        "Furfrou-Matron" : ("Furfrou", 5),
+        "Furfrou-Dandy" : ("Furfrou", 6),
+        "Furfrou-La-Reine" : ("Furfrou", 7),
+        "Furfrou-Kabuki" : ("Furfrou", 8),
+        "Furfrou-Pharaoh" : ("Furfrou", 9),
+        "Aegislash-B" : ("Aegislash", 1),
+        "Pumpkaboo-Small" : ("Pumpkaboo", 1),
+        "Pumpkaboo-Large" : ("Pumpkaboo", 2),
+        "Pumpkaboo-Super" : ("Pumpkaboo", 3),
+        "Gourgeist-Small" : ("Gourgeist", 1),
+        "Gourgeist-Large" : ("Gourgeist", 2),
+        "Gourgeist-Super" : ("Gourgeist", 3),
+        "Zygarde-10%" : ("Zygarde", 1),
+        "Zygarde-C" : ("Zygarde", 5),
+        "Magearna-O" : ("Magearna", 1),
+        "Hoopa-U" : ("Hoopa", 1),
+
+        "Lycanroc-Midnight" : ("Lycanroc", 1),
+        "Lycanroc-Dusk" : ("Lycanroc", 2),
+        "Oricorio-P-P" : ("Oricorio", 1),
+        "Oricorio-P" : ("Oricorio", 2),
+        "Oricorio-S" : ("Oricorio", 3),
+        "Wishiwashi-S" : ("Wishiwashi", 1),
+        "Mimikyu-B" : ("Mimikyu", 1),
+        "Necrozma-D-M" : ("Necrozma", 1),
+        "Necrozma-D-W" : ("Necrozma", 2),
+        "Necrozma-U" : ("Necrozma", 3),
 
         "Rattata-A" : ("Rattata", 1),
         "Raticate-A" : ("Raticate", 1),
@@ -34,11 +135,22 @@ def ResolvePokemon(cell):
         "Exeggutor-A" : ("Exeggutor", 1),
         "Marowak-A" : ("Marowak", 1),
 
+        "Morpeko-H" : ("Morpeko", 1),
+        "Toxtricity-L-K" : ("Toxtricity", 1),
+        "Cramorant-Gulping" : ("Cramorant", 1),
+        "Cramorant-Gorging" : ("Cramorant", 2),
+        "Eiscue-N" : ("Eiscue", 1),
+        "Zacian-C" : ("Zacian", 1),
+        "Zamazenta-C" : ("Zamazenta", 1),
+        "Urshifu-S-S" : ("Urshifu", 0),
+        "Urshifu-R-S" : ("Urshifu", 1),
+        "Zarude-D" : ("Zarude", 1),
+
         "Meowth-G" : ("Meowth", 2),
         "Ponyta-G" : ("Ponyta", 1),
         "Rapidash-G" : ("Rapidash", 1),
         "Slowpoke-G" : ("Slowpoke", 1),
-        "Slowbro-G" : ("Slowbro", 1),
+        "Slowbro-G" : ("Slowbro", 2),
         "Farfetch'd-G" : ("Farfetch'd", 1),
         "Weezing-G" : ("Weezing", 1),
         "Mr. Mime-G" : ("Mr. Mime", 1),
@@ -51,6 +163,8 @@ def ResolvePokemon(cell):
         "Linoone-G" : ("Linoone", 1),
         "Darumaka-G" : ("Darumaka", 1),
         "Darmanitan-G" : ("Darmanitan", 1),
+        "Darmanitan-Z" : ("Darmanitan", 2),
+        "Darmanitan-G-Z" : ("Darmanitan", 3),
         "Yamask-G" : ("Yamask", 1),
         "Stunfisk-G" : ("Stunfisk", 1),
 
@@ -70,6 +184,8 @@ def ResolvePokemon(cell):
         "Goodra-H" : ("Goodra", 1),
         "Avalugg-H" : ("Avalugg", 1),
         "Decidueye-H" : ("Decidueye", 1),
+
+        "Enamorus-T" : ("Enamorus", 1),
 
         "Maushold-F" : ("Maushold", 1),
         "Squawkabilly-B" : ("Squawkabilly", 1),
@@ -95,90 +211,40 @@ def ResolvePokemon(cell):
         "Ursaluna-BM" : ("Ursaluna", 1),
         "Terapagos-T" : ("Terapagos", 1),
         "Terapagos-S" : ("Terapagos", 2),
+
+        "Calyrex-Ice" : ("Calyrex", 1),
+        "Calyrex-Shadow" : ("Calyrex", 2),
+
+        "Unfezant-F" : ("Unfezant", 1),
+        "Frillish-F" : ("Frillish", 1),
+        "Jellicent-F" : ("Jellicent", 1),
+        "Pyroar-F" : ("Pyroar", 1),
+        "Meowstic-M" : ("Meowstic", 0),
+        "Meowstic-F" : ("Meowstic", 1),
+        "Indeedee-F" : ("Indeedee", 1),
+        "Basculegion-F" : ("Basculegion", 1),
     }
 
-    arceusForms = {
-    }
-
+    # Handle Megas
     megas = {
+        "Charizard-M-X" : ("Charizard", 1),
+        "Charizard-M-Y" : ("Charizard", 2),
+        "Mewtwo-M-X" : ("Mewtwo", 1),
+        "Mewtwo-M-Y" : ("Mewtwo", 2),
     }
 
-    return forms.get(cell, pokemon)
+    if pokemon[0].endswith("-M") and pokemon[0] != "Unown":
+        return (pokemon[0][:-2], 1)
+    
+    pokemon = megas.get(pokemon[0], pokemon)
+    
+    # Handle Primals
+    if pokemon[0].endswith("-P"):
+        return (pokemon[0], 1)
 
-# SPECIES_REVAVROOM_SEGIN (SPECIES_PALDEAN_FORMS_START + 14)
-# SPECIES_REVAVROOM_SCHEDAR (SPECIES_PALDEAN_FORMS_START + 15)
-# SPECIES_REVAVROOM_NAVI (SPECIES_PALDEAN_FORMS_START + 16)
-# SPECIES_REVAVROOM_RUCHBAH (SPECIES_PALDEAN_FORMS_START + 17)
-# SPECIES_REVAVROOM_CAPH (SPECIES_PALDEAN_FORMS_START + 18)
-# SPECIES_KORAIDON_LIMITED_BUILD (SPECIES_PALDEAN_FORMS_START + 19)
-# SPECIES_KORAIDON_SPRINTING_BUILD (SPECIES_PALDEAN_FORMS_START + 20)
-# SPECIES_KORAIDON_SWIMMING_BUILD (SPECIES_PALDEAN_FORMS_START + 21)
-# SPECIES_KORAIDON_GLIDING_BUILD (SPECIES_PALDEAN_FORMS_START + 22)
-# SPECIES_MIRAIDON_LOW_POWER_MODE (SPECIES_PALDEAN_FORMS_START + 23)
-# SPECIES_MIRAIDON_DRIVE_MODE (SPECIES_PALDEAN_FORMS_START + 24)
-# SPECIES_MIRAIDON_AQUATIC_MODE (SPECIES_PALDEAN_FORMS_START + 25)
-# SPECIES_MIRAIDON_GLIDE_MODE (SPECIES_PALDEAN_FORMS_START + 26)
-# SPECIES_POLTCHAGEIST_MASTERPIECE (SPECIES_PALDEAN_FORMS_START + 27)
-# SPECIES_SINISTCHA_MASTERPIECE (SPECIES_PALDEAN_FORMS_START + 28)
+    return forms.get(pokemon[0], pokemon)
 
-#  SPECIES_PIKACHU_COSPLAY (SPECIES_MISC_FORM_START)
-#  SPECIES_PIKACHU_ROCK_STAR (SPECIES_MISC_FORM_START + 1)
-#  SPECIES_PIKACHU_BELLE (SPECIES_MISC_FORM_START + 2)
-#  SPECIES_PIKACHU_POP_STAR (SPECIES_MISC_FORM_START + 3)
-#  SPECIES_PIKACHU_PH_D (SPECIES_MISC_FORM_START + 4)
-#  SPECIES_PIKACHU_LIBRE (SPECIES_MISC_FORM_START + 5)
-
-#  SPECIES_PIKACHU_ORIGINAL_CAP (SPECIES_MISC_FORM_START + 6)
-#  SPECIES_PIKACHU_HOENN_CAP (SPECIES_MISC_FORM_START + 7)
-#  SPECIES_PIKACHU_SINNOH_CAP (SPECIES_MISC_FORM_START + 8)
-#  SPECIES_PIKACHU_UNOVA_CAP (SPECIES_MISC_FORM_START + 9)
-#  SPECIES_PIKACHU_KALOS_CAP (SPECIES_MISC_FORM_START + 10)
-#  SPECIES_PIKACHU_ALOLA_CAP (SPECIES_MISC_FORM_START + 11)
-#  SPECIES_PIKACHU_PARTNER_CAP (SPECIES_MISC_FORM_START + 12)
-#  SPECIES_PIKACHU_WORLD_CAP (SPECIES_MISC_FORM_START + 13)
-
-#  SPECIES_CASTFORM_SUNNY (SPECIES_MISC_FORM_START + 14)
-#  SPECIES_CASTFORM_RAINY (SPECIES_MISC_FORM_START + 15)
-#  SPECIES_CASTFORM_SNOWY (SPECIES_MISC_FORM_START + 16)
-
-#  SPECIES_CHERRIM_SUNSHINE (SPECIES_MISC_FORM_START + 17)
-#  SPECIES_SHELLOS_EAST_SEA (SPECIES_MISC_FORM_START + 18)
-#  SPECIES_GASTRODON_EAST_SEA (SPECIES_MISC_FORM_START + 19)
-
-#  SPECIES_DIALGA_ORIGIN (SPECIES_MISC_FORM_START + 20)
-#  SPECIES_PALKIA_ORIGIN (SPECIES_MISC_FORM_START + 21)
-
-#  SPECIES_BASCULIN_BLUE_STRIPED (SPECIES_MISC_FORM_START + 22)
-#  SPECIES_BASCULIN_WHITE_STRIPED (SPECIES_MISC_FORM_START + 23)
-
-#  SPECIES_DARMANITAN_ZEN_MODE (SPECIES_MISC_FORM_START + 24)
-#  SPECIES_DARMANITAN_ZEN_MODE_GALARIAN (SPECIES_MISC_FORM_START + 25)
-
-#  SPECIES_DEERLING_SUMMER (SPECIES_MISC_FORM_START + 26)
-#  SPECIES_DEERLING_AUTUMN (SPECIES_MISC_FORM_START + 27)
-#  SPECIES_DEERLING_WINTER (SPECIES_MISC_FORM_START + 28)
-
-#  SPECIES_SAWSBUCK_SUMMER (SPECIES_MISC_FORM_START + 29)
-#  SPECIES_SAWSBUCK_AUTUMN (SPECIES_MISC_FORM_START + 30)
-#  SPECIES_SAWSBUCK_WINTER (SPECIES_MISC_FORM_START + 31)
-
-#  SPECIES_TORNADUS_THERIAN (SPECIES_MISC_FORM_START + 32)
-#  SPECIES_THUNDURUS_THERIAN (SPECIES_MISC_FORM_START + 33)
-#  SPECIES_LANDORUS_THERIAN (SPECIES_MISC_FORM_START + 34)
-
-#  SPECIES_KYUREM_WHITE (SPECIES_MISC_FORM_START + 35)
-#  SPECIES_KYUREM_BLACK (SPECIES_MISC_FORM_START + 36)
-
-#  SPECIES_KELDEO_RESOLUTE (SPECIES_MISC_FORM_START + 37)
-#  SPECIES_MELOETTA_PIROUETTE (SPECIES_MISC_FORM_START + 38)
-
-#  SPECIES_GENESECT_DOUSE_DRIVE (SPECIES_MISC_FORM_START + 39)
-#  SPECIES_GENESECT_SHOCK_DRIVE (SPECIES_MISC_FORM_START + 40)
-#  SPECIES_GENESECT_BURN_DRIVE (SPECIES_MISC_FORM_START + 41)
-#  SPECIES_GENESECT_CHILL_DRIVE (SPECIES_MISC_FORM_START + 42)
-
-#  SPECIES_GRENINJA_BATTLE_BOND (SPECIES_MISC_FORM_START + 43)
-#  SPECIES_GRENINJA_ASH (SPECIES_MISC_FORM_START + 44)
+# Unsupported Forms (for now)
 
 #  SPECIES_VIVILLON_POLAR (SPECIES_MISC_FORM_START + 45)
 #  SPECIES_VIVILLON_TUNDRA (SPECIES_MISC_FORM_START + 46)
@@ -216,46 +282,6 @@ def ResolvePokemon(cell):
 #  SPECIES_FLORGES_BLUE_FLOWER (SPECIES_MISC_FORM_START + 75)
 #  SPECIES_FLORGES_WHITE_FLOWER (SPECIES_MISC_FORM_START + 76)
 
-#  SPECIES_FURFROU_HEART (SPECIES_MISC_FORM_START + 77)
-#  SPECIES_FURFROU_STAR (SPECIES_MISC_FORM_START + 78)
-#  SPECIES_FURFROU_DIAMOND (SPECIES_MISC_FORM_START + 79)
-#  SPECIES_FURFROU_DEBUTANTE (SPECIES_MISC_FORM_START + 80)
-#  SPECIES_FURFROU_MATRON (SPECIES_MISC_FORM_START + 81)
-#  SPECIES_FURFROU_DANDY (SPECIES_MISC_FORM_START + 82)
-#  SPECIES_FURFROU_LA_REINE (SPECIES_MISC_FORM_START + 83)
-#  SPECIES_FURFROU_KABUKI (SPECIES_MISC_FORM_START + 84)
-#  SPECIES_FURFROU_PHARAOH (SPECIES_MISC_FORM_START + 85)
-
-#  SPECIES_AEGISLASH_BLADE (SPECIES_MISC_FORM_START + 86)
-
-#  SPECIES_PUMPKABOO_SMALL (SPECIES_MISC_FORM_START + 87)
-#  SPECIES_PUMPKABOO_LARGE (SPECIES_MISC_FORM_START + 88)
-#  SPECIES_PUMPKABOO_SUPER (SPECIES_MISC_FORM_START + 89)
-
-#  SPECIES_GOURGEIST_SMALL (SPECIES_MISC_FORM_START + 90)
-#  SPECIES_GOURGEIST_LARGE (SPECIES_MISC_FORM_START + 91)
-#  SPECIES_GOURGEIST_SUPER (SPECIES_MISC_FORM_START + 92)
-
-#  SPECIES_XERNEAS_ACTIVE (SPECIES_MISC_FORM_START + 93)
-
-#  SPECIES_ZYGARDE_10 (SPECIES_MISC_FORM_START + 94)
-#  SPECIES_ZYGARDE_10_POWER_CONSTRUCT (SPECIES_MISC_FORM_START + 95)
-#  SPECIES_ZYGARDE_50_POWER_CONSTRUCT (SPECIES_MISC_FORM_START + 96)
-#  SPECIES_ZYGARDE_10_COMPLETE (SPECIES_MISC_FORM_START + 97)
-#  SPECIES_ZYGARDE_50_COMPLETE (SPECIES_MISC_FORM_START + 98)
-
-#  SPECIES_HOOPA_UNBOUND (SPECIES_MISC_FORM_START + 99)
-
-#  SPECIES_ORICORIO_POM_POM (SPECIES_MISC_FORM_START + 100)
-#  SPECIES_ORICORIO_PAU (SPECIES_MISC_FORM_START + 101)
-#  SPECIES_ORICORIO_SENSU (SPECIES_MISC_FORM_START + 102)
-
-#  SPECIES_ROCKRUFF_OWN_TEMPO (SPECIES_MISC_FORM_START + 103)
-#  SPECIES_LYCANROC_MIDNIGHT (SPECIES_MISC_FORM_START + 104)
-#  SPECIES_LYCANROC_DUSK (SPECIES_MISC_FORM_START + 105)
-
-#  SPECIES_WISHIWASHI_SCHOOL (SPECIES_MISC_FORM_START + 106)
-
 #  SPECIES_MINIOR_METEOR_ORANGE (SPECIES_MISC_FORM_START + 107)
 #  SPECIES_MINIOR_METEOR_YELLOW (SPECIES_MISC_FORM_START + 108)
 #  SPECIES_MINIOR_METEOR_GREEN (SPECIES_MISC_FORM_START + 109)
@@ -270,26 +296,6 @@ def ResolvePokemon(cell):
 #  SPECIES_MINIOR_CORE_INDIGO (SPECIES_MISC_FORM_START + 118)
 #  SPECIES_MINIOR_CORE_VIOLET (SPECIES_MISC_FORM_START + 119)
 
-#  SPECIES_MIMIKYU_BUSTED (SPECIES_MISC_FORM_START + 120)
-
-#  SPECIES_NECROZMA_DUSK_MANE (SPECIES_MISC_FORM_START + 121)
-#  SPECIES_NECROZMA_DAWN_WINGS (SPECIES_MISC_FORM_START + 122)
-#  SPECIES_NECROZMA_ULTRA_DUSK_MANE (SPECIES_MISC_FORM_START + 123)
-#  SPECIES_NECROZMA_ULTRA_DAWN_WINGS (SPECIES_MISC_FORM_START + 124)
-
-#  SPECIES_MAGEARNA_ORIGINAL (SPECIES_MISC_FORM_START + 125)
-
-#  SPECIES_PIKACHU_PARTNER (SPECIES_MISC_FORM_START + 126)
-#  SPECIES_EEVEE_PARTNER (SPECIES_MISC_FORM_START + 127)
-
-#  SPECIES_CRAMORANT_GULPING (SPECIES_MISC_FORM_START + 128)
-#  SPECIES_CRAMORANT_GORGING (SPECIES_MISC_FORM_START + 129)
-
-#  SPECIES_TOXTRICITY_LOW_KEY (SPECIES_MISC_FORM_START + 130)
-
-#  SPECIES_SINISTEA_ANTIQUE (SPECIES_MISC_FORM_START + 131)
-#  SPECIES_POLTEAGEIST_ANTIQUE (SPECIES_MISC_FORM_START + 132)
-
 #  SPECIES_ALCREMIE_BERRY_SWEET (SPECIES_MISC_FORM_START + 133)
 #  SPECIES_ALCREMIE_LOVE_SWEET (SPECIES_MISC_FORM_START + 134)
 #  SPECIES_ALCREMIE_STAR_SWEET (SPECIES_MISC_FORM_START + 135)
@@ -299,25 +305,151 @@ def ResolvePokemon(cell):
 #  SPECIES_ALCREMIE_FILLER_1 (SPECIES_MISC_FORM_START + 139)
 #  SPECIES_ALCREMIE_FILLER_2 (SPECIES_MISC_FORM_START + 140)
 
-#  SPECIES_EISCUE_NOICE_FACE (SPECIES_MISC_FORM_START + 141)
-#  SPECIES_MORPEKO_HANGRY (SPECIES_MISC_FORM_START + 142)
+def ResolveMove(move):
+    movesReplacement = {
+        "Vise Grip" : "Vice Grip",
+        "Forest’s Curse" : "Forests Curse",
+        "King’s Shield" : "Kings Shield",
+        "Land’s Wrath" : "Lands Wrath",
+    }
 
-#  SPECIES_ZACIAN_CROWNED (SPECIES_MISC_FORM_START + 143)
-#  SPECIES_ZAMAZENTA_CROWNED (SPECIES_MISC_FORM_START + 144)
+    move = movesReplacement.get(move, move)
 
-#  SPECIES_ETERNATUS_ETERNAMAX (SPECIES_MISC_FORM_START + 145)
-#  SPECIES_URSHIFU_RAPID_STRIKE (SPECIES_MISC_FORM_START + 146)
-#  SPECIES_ZARUDE_DADA (SPECIES_MISC_FORM_START + 147)
+    return "MOVE_"+move.upper().replace(" ", "_").replace('-','_')
+    
+def ResolveAbility(ability):
+    abilitiesReplacement = {
+        "Dragon’s Maw" : "Dragons Maw",
+        "As One (Glastrier)" : "As One Glastrier",
+        "As One (Spectrier)" : "As On Spectrier",
+    }
 
-#  SPECIES_CALYREX_ICE_RIDER (SPECIES_MISC_FORM_START + 148)
-#  SPECIES_CALYREX_SHADOW_RIDER (SPECIES_MISC_FORM_START + 149)
+    ability = abilitiesReplacement.get(ability, ability).replace('-','_')
 
-#  SPECIES_ENAMORUS_THERIAN (SPECIES_MISC_FORM_START + 150)
+    return "ABILITY_"+ability.upper().replace(" ", "_")
 
-#  SPECIES_UNFEZANT_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START)
-#  SPECIES_FRILLISH_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START + 1)
-#  SPECIES_JELLICENT_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START + 2)
-#  SPECIES_PYROAR_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START + 3)
-#  SPECIES_MEOWSTIC_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START + 4)
-#  SPECIES_INDEEDEE_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START + 5)
-#  SPECIES_BASCULEGION_FEMALE (SPECIES_SIGNIFICANT_GENDER_DIFFERENCE_START + 6)
+def ResolveItem(item):
+    itemsReplacement = {
+        "King’s Rock" : "Kings Rock",
+    }
+
+    item = itemsReplacement.get(item, item).replace('-','_')
+
+    return "ITEM_"+item.upper().replace(" ", "_")
+
+def ResolveBall(ball):
+    ballsReplacement = {
+
+    }
+
+    ball = ballsReplacement.get(ball, ball)
+
+    return ball.upper().replace(" ", "_")
+
+def ResolveNature(nature):
+    naturesReplacement = {
+
+    }
+
+    nature = naturesReplacement.get(nature, nature)
+
+    return "NATURE_"+nature.upper().replace(" ", "_")
+
+def ResolveStatus(status):
+    statusReplacement = {
+        "Poisoned": "Poison",
+        "Burned": "Burn",
+        "Paralyzed": "Paralysis",
+        "Frozen": "Freeze",
+        "Asleep": "Sleep",
+    }
+
+    status = statusReplacement.get(status, status)
+
+    return "CONDITION_"+status.upper().replace(" ", "_")
+
+def ResolveTypes(types):
+    typesReplacement = {
+
+    }
+
+    types[0] = typesReplacement.get(types[0], types[0]).upper()
+    types[1] = typesReplacement.get(types[1], types[1]).upper()
+
+    return types
+
+def ResolveNickname(nickname: str) -> str:
+    nickname_parts = []
+
+    for char in nickname:
+        if char.isupper():
+            nickname_parts.append(f"_{char}")
+        elif char.islower():
+            nickname_parts.append(f"_{char}_")
+        else:
+            raise ValueError(f"Unsupported character in nickname: {char}")
+
+    # Pad to 12 fields (nickname + _endstr + 0 padding)
+    nickname_parts.append("_endstr")
+    while len(nickname_parts) < 12:
+        nickname_parts.append("0")
+
+    return "nickname " + ", ".join(nickname_parts)
+
+def ResolveItemForm(pokemon, item):
+
+    megaStones = {
+        ("Venusaur", 1) : "Venusaurite",
+        ("Charizard", 1) : "Charizardite Y",
+        ("Charizard", 2) : "Charizardite X",
+        ("Blastoise", 1) : "Blastoisinite",
+        ("Beedrill", 1) : "Beedrillite",
+        ("Pidgeot", 1) : "Pidgeotite",
+        ("Alakazam", 1) : "Alakazite",
+        ("Gengar", 1) : "Gengarite",
+        ("Kangaskhan", 1) : "Kangaskhanite",
+        ("Pinsir", 1) : "Pinsirite",
+        ("Gyarados", 1) : "Gyaradosite",
+        ("Aerodactyl", 1) : "Aerodactylite",
+        ("Mewtwo", 1) : "Mewtwonite Y",
+        ("Mewtwo", 2) : "Mewtwonite X",
+        ("Ampharos", 1) : "Ampharosite",
+        ("Steelix", 1) : "Steelixite",
+        ("Scizor", 1) : "Scizorite",
+        ("Heracross", 1) : "Heracronite",
+        ("Houndoom", 1) : "Houndoominite",
+        ("Tyranitar", 1) : "Tyranitarite",
+        ("Sceptile", 1) : "Sceptilite",
+        ("Blaziken", 1) : "Blazikenite",
+        ("Swampert", 1) : "Swampertite",
+        ("Gardevoir", 1) : "Gardevoirite",
+        ("Sableye", 1) : "Sablenite",
+        ("Mawile", 1) : "Mawilite",
+        ("Aggron", 1) : "Aggronite",
+        ("Medicham", 1) : "Medichamite",
+        ("Manectric", 1) : "Manectite",
+        ("Sharpedo", 1) : "Sharpedonite",
+        ("Camerupt", 1) : "Cameruptite",
+        ("Altaria", 1) : "Altarianite",
+        ("Banette", 1) : "Banettite",
+        ("Absol", 1) : "Absolite",
+        ("Glalie", 1) : "Glalitite",
+        ("Salamence", 1) : "Salamencite",
+        ("Metagross", 1) : "Metagrossite",
+        ("Latias", 1) : "Latiasite",
+        ("Latios", 1) : "Latiosite",
+        ("Lopunny", 1) : "Lopunnite",
+        ("Garchomp", 1) : "Garchompite",
+        ("Lucario", 1) : "Lucarionite",
+        ("Abomasnow", 1) : "Abomasite",
+        ("Gallade", 1) : "Galladite",
+        ("Audino", 1) : "Audinite",
+        ("Diancie", 1) : "Diancite",
+    }
+
+    if megaStones.get(pokemon) == item:
+        temp_list = list(pokemon)
+        temp_list[1] = 0
+        pokemon = tuple(temp_list)
+
+    return pokemon, item
