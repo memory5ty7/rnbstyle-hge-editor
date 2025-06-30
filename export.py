@@ -115,9 +115,9 @@ def print_data(data: List[TrainerData], output_file: str):
                 lines[start_idx:end_idx + 1] = new_block
             else:
                 lines.extend(["\n"] + new_block)
-            print(f"Inserted trainer : {trainer.name} with ID {trainer.id}\n")
+            print(f"Inserted trainer : {trainer.name} with ID {trainer.id}")
         except:
-            print(f"Invalid trainer : {trainer.name} with ID {trainer.id}\n")
+            print(f"Invalid trainer : {trainer.name} with ID {trainer.id}")
 
     with open(output_file, 'w', encoding='utf-8') as f:
         f.writelines(lines)

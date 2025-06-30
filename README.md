@@ -20,7 +20,7 @@ You should now have ```folder/hg-engine``` and ```folder/rnbstyle-hge-editor```
 
 3. Create a copy of the [Run and Bun-Style sample sheet](https://docs.google.com/spreadsheets/d/1QQ9A7cZD-ivIZ9QNOgbUV2toyaC7QJ42lxEYZk_odos/edit?usp=sharing) on your Google Drive account.
 
-4. Customize the trainers however you want following the [Editing Instructions](Instructions.md)
+4. Customize the trainers the way you want following the [Editing Instructions](Instructions.md)
 
 5. Once the modifications are done, download the Sheet you want as a .csv and place it in the [csv subfolder](csv) of rnbstyle-hge-editor.
 
@@ -70,3 +70,14 @@ Every contribution is welcome !
 * [Memory5ty7](https://github.com/Memory5ty7/)
 * [hg-engine](https://github.com/BluRosie/hg-engine/blob/main/CREDITS.md)
 * [dekzeh](https://x.com/dekzeh) : Pokémon Run and Bun
+* [Caruban](https://www.pokecommunity.com/members/caruban.726868/) : Compilation of Pokémon Sprites
+* **Gen 1-5 Pokemon Sprites** - veekun
+* **Gen 6 Pokemon Sprites** - All Contributors To Smogon X/Y Sprite Project
+* **Gen 7 Pokemon Sprites** - All Contributors To Smogon Sun/Moon Sprite Project
+* **Gen 8 Pokemon Sprites** - All Contributors To Smogon Sword/Shield Sprite Project
+* **PLA Pokemon Sprites** - Smogon Sprite Project
+Blaquaza, KingOfThe-X-Roads, KattenK, Travis, G.E.Z., SpheX, Hematite, SelenaArmorclaw
+* **Gen 9 Pokemon Sprites** - KingOfThe-X-Roads, Mak, Caruban, jinxed, leParagon, Sopita_Yorita, Azria, Mashirosakura,
+JordanosArt, Abnayami, OldSoulja, Katten, Divaruta 666, Clara, Skyflyer, AshnixsLaw, ace_stryfe
+* **Gen 9 Vanilla style sprites** - KingOfThe-X-Roads, Mak, Caruban, jinxed, leParagon, Sopita_Yorita, Azria, Mashirosakura, JordanosArt, Scept, NanaelJustice, SoyChim, KRLW890, AnonAlpaca, PokeJminer, Red7246, Carmanekko, Eduar, Lykeron, GriloKapu10, Mesayas, Erkey830, QDylm, PorousMist, OldSoulja, AlexandreV2.0, Z-nogyroP, lennybitao, Ruben1986, GRAFAIAIMX
+Blaquaza, KattenK, Travis, G.E.Z., SpheX, Hematite

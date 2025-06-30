@@ -4,7 +4,13 @@ class Config:
     ROOT_DIR = "../hg-engine/"
 
     # hg-engine directories
-    OUTPUT_FILE = ROOT_DIR + "armips/data/trainers/trainers.s"
+    TRAINER_DIR = ROOT_DIR + "armips/data/trainers/"
+    OUTPUT_FILE = TRAINER_DIR + "trainers.s"
+
+    # If set to True, a copy of trainers.s will be created before priting the trainers
+    CREATE_BACKUP = True
+    BACKUP_FILE = TRAINER_DIR + "trainers_backup.s"
+
     INCLUDE_DIR = ROOT_DIR + "include/"
     CONSTANTS_DIR = INCLUDE_DIR + "constants/"
     ABILITY_HEADER = CONSTANTS_DIR + "ability.h"
@@ -17,16 +23,16 @@ class Config:
     
     # Trainer Configuration
 
-    # Default AI flags for Trainers if there is no "AI" row
+    # Default Trainer AI Flags
     DEFAULT_AI_FLAGS = ["F_PRIORITIZE_SUPER_EFFECTIVE", "F_EVALUATE_ATTACKS", "F_EXPERT_ATTACKS"]
 
-    # Default Trainer Items if there is no "Items" row
+    # Default Trainer Items
     DEFAULT_ITEMS = ["ITEM_NONE", "ITEM_NONE", "ITEM_NONE", "ITEM_NONE"]
 
 
     # Pokémon Configuration
 
-    # Default DV Value if there is no "DV" row (IVs are calculated using the formula IVs = DV / 255 * 31; IVs are 0 by default)
+    # Default DV Value if there is no "DV" row
     DEFAULT_DV = 255
 
     # Use custom IV/EV values instead of DV even if there are no "IV" or "EV" rows
