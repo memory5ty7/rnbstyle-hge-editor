@@ -13,6 +13,7 @@ class Config:
     SPECIES_HEADER = CONSTANTS_DIR + "species.h"
     TRAINERCLASS_HEADER = CONSTANTS_DIR + "trainerclass.h"
     BATTLE_HEADER = INCLUDE_DIR + "battle.h"
+    POKEMON_HEADER = INCLUDE_DIR + "pokemon.h"
     
     # Trainer Configuration
 
@@ -20,7 +21,7 @@ class Config:
     DEFAULT_AI_FLAGS = ["F_PRIORITIZE_SUPER_EFFECTIVE", "F_EVALUATE_ATTACKS", "F_EXPERT_ATTACKS"]
 
     # Default Trainer Items if there is no "Items" row
-    DEFAULT_ITEMS = {"ITEM_NONE", "ITEM_NONE", "ITEM_NONE", "ITEM_NONE"}
+    DEFAULT_ITEMS = ["ITEM_NONE", "ITEM_NONE", "ITEM_NONE", "ITEM_NONE"]
 
 
     # Pokémon Configuration

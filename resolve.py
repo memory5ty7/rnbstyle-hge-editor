@@ -86,6 +86,38 @@ def ResolvePokemon(cell):
         "Genesect-C" : ("Genesect", 4),
 
         "Greninja-Ash" : ("Greninja", 2),
+        "Vivillon-Polar" : ("Vivillon", 1),
+        "Vivillon-Tundra" : ("Vivillon", 2),
+        "Vivillon-Continental" : ("Vivillon", 3),
+        "Vivillon-Garden" : ("Vivillon", 4),
+        "Vivillon-Elegant" : ("Vivillon", 5),
+        "Vivillon-Meadow" : ("Vivillon", 6),
+        "Vivillon-Modern" : ("Vivillon", 7),
+        "Vivillon-Marine" : ("Vivillon", 8),
+        "Vivillon-Archipelago" : ("Vivillon", 9),
+        "Vivillon-High Plains" : ("Vivillon", 10),
+        "Vivillon-Sandstorm" : ("Vivillon", 11),
+        "Vivillon-River" : ("Vivillon", 12),
+        "Vivillon-Monsoon" : ("Vivillon", 13),
+        "Vivillon-Savanna" : ("Vivillon", 14),
+        "Vivillon-Sun" : ("Vivillon", 15),
+        "Vivillon-Ocean" : ("Vivillon", 16),
+        "Vivillon-Jungle" : ("Vivillon", 17),
+        "Vivillon-Fancy" : ("Vivillon", 18),
+        "Vivillon-Poké Ball" : ("Vivillon", 19),
+        "Flabébé-Y" : ("Flabébé", 1),
+        "Flabébé-O" : ("Flabébé", 2),
+        "Flabébé-B" : ("Flabébé", 3),
+        "Flabébé-W" : ("Flabébé", 4),
+        "Floette-Y" : ("Floette", 1),
+        "Floette-O" : ("Floette", 2),
+        "Floette-B" : ("Floette", 3),
+        "Floette-N" : ("Floette", 4),
+        "Floette-E" : ("Floette", 5),
+        "Florges-Y" : ("Florges", 1),
+        "Florges-O" : ("Florges", 2),
+        "Florges-B" : ("Florges", 3),
+        "Florges-N" : ("Florges", 4),
         "Furfrou-Heart" : ("Furfrou", 1),
         "Furfrou-Star" : ("Furfrou", 2),
         "Furfrou-Diamond" : ("Furfrou", 3),
@@ -114,6 +146,20 @@ def ResolvePokemon(cell):
         "Oricorio-S" : ("Oricorio", 3),
         "Wishiwashi-S" : ("Wishiwashi", 1),
         "Mimikyu-B" : ("Mimikyu", 1),
+        "Minior-R" : ("Minior", 1),
+        "Minior-O" : ("Minior", 2),
+        "Minior-Y" : ("Minior", 3),
+        "Minior-G" : ("Minior", 4),
+        "Minior-B" : ("Minior", 5),
+        "Minior-I" : ("Minior", 6),
+        "Minior-V" : ("Minior", 7),
+        "Minior-C-R" : ("Minior", 8),
+        "Minior-C-O" : ("Minior", 9),
+        "Minior-C-Y" : ("Minior", 10),
+        "Minior-C-G" : ("Minior", 11),
+        "Minior-C-B" : ("Minior", 12),
+        "Minior-C-I" : ("Minior", 13),
+        "Minior-C-V" : ("Minior", 14),
         "Necrozma-D-M" : ("Necrozma", 1),
         "Necrozma-D-W" : ("Necrozma", 2),
         "Necrozma-U" : ("Necrozma", 3),
@@ -248,56 +294,6 @@ def ResolvePokemon(cell):
 
 # Unsupported Forms (for now)
 
-#  SPECIES_VIVILLON_POLAR (SPECIES_MISC_FORM_START + 45)
-#  SPECIES_VIVILLON_TUNDRA (SPECIES_MISC_FORM_START + 46)
-#  SPECIES_VIVILLON_CONTINENTAL (SPECIES_MISC_FORM_START + 47)
-#  SPECIES_VIVILLON_GARDEN (SPECIES_MISC_FORM_START + 48)
-#  SPECIES_VIVILLON_ELEGANT (SPECIES_MISC_FORM_START + 49)
-#  SPECIES_VIVILLON_MEADOW (SPECIES_MISC_FORM_START + 50)
-#  SPECIES_VIVILLON_MODERN (SPECIES_MISC_FORM_START + 51)
-#  SPECIES_VIVILLON_MARINE (SPECIES_MISC_FORM_START + 52)
-#  SPECIES_VIVILLON_ARCHIPELAGO (SPECIES_MISC_FORM_START + 53)
-#  SPECIES_VIVILLON_HIGH_PLAINS (SPECIES_MISC_FORM_START + 54)
-#  SPECIES_VIVILLON_SANDSTORM (SPECIES_MISC_FORM_START + 55)
-#  SPECIES_VIVILLON_RIVER (SPECIES_MISC_FORM_START + 56)
-#  SPECIES_VIVILLON_MONSOON (SPECIES_MISC_FORM_START + 57)
-#  SPECIES_VIVILLON_SAVANNA (SPECIES_MISC_FORM_START + 58)
-#  SPECIES_VIVILLON_SUN (SPECIES_MISC_FORM_START + 59)
-#  SPECIES_VIVILLON_OCEAN (SPECIES_MISC_FORM_START + 60)
-#  SPECIES_VIVILLON_JUNGLE (SPECIES_MISC_FORM_START + 61)
-#  SPECIES_VIVILLON_FANCY (SPECIES_MISC_FORM_START + 62)
-#  SPECIES_VIVILLON_POKE_BALL (SPECIES_MISC_FORM_START + 63)
-
-#  SPECIES_FLABEBE_YELLOW_FLOWER (SPECIES_MISC_FORM_START + 64)
-#  SPECIES_FLABEBE_ORANGE_FLOWER (SPECIES_MISC_FORM_START + 65)
-#  SPECIES_FLABEBE_BLUE_FLOWER (SPECIES_MISC_FORM_START + 66)
-#  SPECIES_FLABEBE_WHITE_FLOWER (SPECIES_MISC_FORM_START + 67)
-
-#  SPECIES_FLOETTE_YELLOW_FLOWER (SPECIES_MISC_FORM_START + 68)
-#  SPECIES_FLOETTE_ORANGE_FLOWER (SPECIES_MISC_FORM_START + 69)
-#  SPECIES_FLOETTE_BLUE_FLOWER (SPECIES_MISC_FORM_START + 70)
-#  SPECIES_FLOETTE_WHITE_FLOWER (SPECIES_MISC_FORM_START + 71)
-#  SPECIES_FLOETTE_ETERNAL_FLOWER (SPECIES_MISC_FORM_START + 72)
-
-#  SPECIES_FLORGES_YELLOW_FLOWER (SPECIES_MISC_FORM_START + 73)
-#  SPECIES_FLORGES_ORANGE_FLOWER (SPECIES_MISC_FORM_START + 74)
-#  SPECIES_FLORGES_BLUE_FLOWER (SPECIES_MISC_FORM_START + 75)
-#  SPECIES_FLORGES_WHITE_FLOWER (SPECIES_MISC_FORM_START + 76)
-
-#  SPECIES_MINIOR_METEOR_ORANGE (SPECIES_MISC_FORM_START + 107)
-#  SPECIES_MINIOR_METEOR_YELLOW (SPECIES_MISC_FORM_START + 108)
-#  SPECIES_MINIOR_METEOR_GREEN (SPECIES_MISC_FORM_START + 109)
-#  SPECIES_MINIOR_METEOR_BLUE (SPECIES_MISC_FORM_START + 110)
-#  SPECIES_MINIOR_METEOR_INDIGO (SPECIES_MISC_FORM_START + 111)
-#  SPECIES_MINIOR_METEOR_VIOLET (SPECIES_MISC_FORM_START + 112)
-#  SPECIES_MINIOR_CORE_RED (SPECIES_MISC_FORM_START + 113)
-#  SPECIES_MINIOR_CORE_ORANGE (SPECIES_MISC_FORM_START + 114)
-#  SPECIES_MINIOR_CORE_YELLOW (SPECIES_MISC_FORM_START + 115)
-#  SPECIES_MINIOR_CORE_GREEN (SPECIES_MISC_FORM_START + 116)
-#  SPECIES_MINIOR_CORE_BLUE (SPECIES_MISC_FORM_START + 117)
-#  SPECIES_MINIOR_CORE_INDIGO (SPECIES_MISC_FORM_START + 118)
-#  SPECIES_MINIOR_CORE_VIOLET (SPECIES_MISC_FORM_START + 119)
-
 #  SPECIES_ALCREMIE_BERRY_SWEET (SPECIES_MISC_FORM_START + 133)
 #  SPECIES_ALCREMIE_LOVE_SWEET (SPECIES_MISC_FORM_START + 134)
 #  SPECIES_ALCREMIE_STAR_SWEET (SPECIES_MISC_FORM_START + 135)
@@ -308,6 +304,10 @@ def ResolvePokemon(cell):
 #  SPECIES_ALCREMIE_FILLER_2 (SPECIES_MISC_FORM_START + 140)
 
 def ResolveMove(move):
+
+    if(move == "MOVE_NONE"):
+        return move
+
     movesReplacement = {
         "Vise Grip" : "Vice Grip",
         "Forest’s Curse" : "Forests Curse",

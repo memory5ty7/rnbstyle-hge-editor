@@ -1,20 +1,10 @@
 from config import Config
 from csv_parser import list_csv_files, read_csv, parse_csv
-from exporter import print_data
-from header_parser import extract_defines
-
-headers = [
-    Config.ABILITY_HEADER,
-    Config.BATTLE_HEADER,
-    Config.ITEM_HEADER,
-    Config.MOVE_HEADER,
-    Config.SPECIES_HEADER,
-    Config.TRAINERCLASS_HEADER
-]
+from export import print_data
+from validity_checker import init_defines
 
 def main():
-    for header in headers:
-        extract_defines(header)
+    init_defines()
 
     csv_files = list_csv_files(Config.INPUT_DIR)
 

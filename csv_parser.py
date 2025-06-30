@@ -129,15 +129,15 @@ def parse_csv(rows):
                         current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_SP_ATK")
                         current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_SP_DEF")
                     current.trainermontype.add("TRAINER_DATA_TYPE_ADDITIONAL_FLAGS")
-            case "Types":
-                for j, cell in enumerate(row[1:1 + current.nummons]):
-                    if cell != "-":
-                        if ',' in cell:
-                            current.party[j].types = cell.split(', ')
-                        else:
-                            current.party[j].types = [cell, cell]
-                        current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_TYPES")
-                    current.trainermontype.add("TRAINER_DATA_TYPE_ADDITIONAL_FLAGS")
+            # case "Types":
+            #     for j, cell in enumerate(row[1:1 + current.nummons]):
+            #         if cell != "-":
+            #             if ',' in cell:
+            #                 current.party[j].types = cell.split(', ')
+            #             else:
+            #                 current.party[j].types = [cell, cell]
+            #             current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_TYPES")
+            #         current.trainermontype.add("TRAINER_DATA_TYPE_ADDITIONAL_FLAGS")
             case "Nickname":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
                     if cell != "-":
@@ -154,5 +154,6 @@ def parse_csv(rows):
             case _:
                 print(f"Unknown Key in Row {i} : {key}")
 
+    trainers.append(current)
     return trainers
 
