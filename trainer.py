@@ -7,20 +7,20 @@ class TrainerMon:
     dv: int = Config.DEFAULT_DV
     abilityslot: int = 0
     level: int = 0
-    pokemon: tuple[int, int] = (0,0)
-    item: int = "None"
-    move: List[int] = field(default_factory=lambda: [0, 0, 0, 0])
+    pokemon: tuple[str, int] = ("None",0)
+    item: str = "None"
+    move: List[str] = field(default_factory=lambda: ["None", "None", "None", "None"])
     ability: str = "None"
-    ball: int = "Poke Ball"
+    ball: str = Config.DEFAULT_BALL
     setivs: List[int] = field(default_factory=lambda: Config.DEFAULT_IVS.copy)
     setevs: List[int] = field(default_factory=lambda: Config.DEFAULT_EVS.copy)
     nature: str = "Hardy"
     shinylock: bool = False
     # Additional flags
     additionalFlags: List[str] = field(default_factory=list)
-    status: str = "None"
+    status: int = 0x0
     stats: List[int] = field(default_factory=lambda: [0, 0, 0, 0, 0, 0])
-    types: Tuple[int, int] = (0, 0)
+    types: Tuple[str, str] = ("Normal", "Normal")
     ppcounts: List[int] = field(default_factory=lambda: [0, 0, 0, 0])
     nickname: str = ""
     ballseal: int = 0
@@ -29,10 +29,10 @@ class TrainerMon:
 class TrainerData:
     id: int = 0
     name: str = ""
-    trainermontype: Set[str] = field(default_factory=list)
-    trainerclass: int = 0
+    trainermontype: Set[str] = field(default_factory=set)
+    trainerclass: str = "Ethan"
     nummons: int = 0
-    item: List[int] = field(default_factory=lambda: [0]*4)
+    item: List[str] = field(default_factory=lambda: Config.DEFAULT_AI_FLAGS.copy())
     aiflags: Set[str] = field(default_factory=lambda: Config.DEFAULT_AI_FLAGS.copy())
     battletype: bool = False
     party: List[TrainerMon] = field(default_factory=list)

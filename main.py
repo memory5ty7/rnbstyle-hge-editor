@@ -1,6 +1,5 @@
 from config import Config
-from file_manager import list_csv_files, read_csv
-from csv_parser import parse_csv
+from csv_parser import list_csv_files, read_csv, parse_csv
 from exporter import print_data
 from header_parser import extract_defines
 

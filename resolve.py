@@ -1,3 +1,5 @@
+import re
+
 def ResolvePokemon(cell):
     pokemon = (cell, 0)
 
@@ -357,24 +359,34 @@ def ResolveNature(nature):
 
 def ResolveStatus(status):
     statusReplacement = {
-        "Poisoned": "Poison",
-        "Burned": "Burn",
-        "Paralyzed": "Paralysis",
-        "Frozen": "Freeze",
-        "Asleep": "Sleep",
+        "Poisoned": 0x8,
+        "Badly Poisoned": 0x80,
+        "Burned": 0x10,
+        "Paralyzed": 0x40,
+        "Frozen": 0x20,
+        "Asleep": 0x1,
+        "Asleep (1 Turn)": 0x1,
+        "Asleep (2 Turns)": 0x2,
+        "Asleep (3 Turns)": 0x3,
+        "Asleep (4 Turns)": 0x4,
+        "Asleep (5 Turns)": 0x5,
+        "Asleep (6 Turns)": 0x6,
+        "Asleep (7 Turns)": 0x7,
     }
 
-    status = statusReplacement.get(status, status)
+    status = statusReplacement.get(status)
 
-    return "CONDITION_"+status.upper().replace(" ", "_")
+    return status
 
-def ResolveTypes(types):
+def ResolveTypes(cell):
     typesReplacement = {
 
     }
 
-    types[0] = typesReplacement.get(types[0], types[0]).upper()
-    types[1] = typesReplacement.get(types[1], types[1]).upper()
+    type1 = typesReplacement.get(cell[0], "TYPE_"+cell[0].upper())
+    type2 = typesReplacement.get(cell[1], "TYPE_"+cell[1].upper())
+
+    types= (type1, type2)
 
     return types
 
@@ -391,10 +403,10 @@ def ResolveNickname(nickname: str) -> str:
 
     # Pad to 12 fields (nickname + _endstr + 0 padding)
     nickname_parts.append("_endstr")
-    while len(nickname_parts) < 12:
+    while len(nickname_parts) < 11:
         nickname_parts.append("0")
 
-    return "nickname " + ", ".join(nickname_parts)
+    return ", ".join(nickname_parts)
 
 def ResolveItemForm(pokemon, item):
 
@@ -453,3 +465,106 @@ def ResolveItemForm(pokemon, item):
         pokemon = tuple(temp_list)
 
     return pokemon, item
+
+def ResolveTrainerClass(trclass, trname):
+    
+    specialTrainerClasses = {
+        "Ethan" : "TRAINERCLASS_PKMN_TRAINER_ETHAN",
+        "Lyra" : "TRAINERCLASS_PKMN_TRAINER_LYRA",
+        "Falkner" : "TRAINERCLASS_LEADER_FALKNER",
+        "Bugsy" : "TRAINERCLASS_LEADER_BUGSY",
+        "Whitney" : "TRAINERCLASS_LEADER_WHITNEY",
+        "Morty" : "TRAINERCLASS_LEADER_MORTY",
+        "Pryce" : "TRAINERCLASS_LEADER_PRYCE",
+        "Jasmine" : "TRAINERCLASS_LEADER_JASMINE",
+        "Chuck" : "TRAINERCLASS_LEADER_CHUCK",
+        "Clair" : "TRAINERCLASS_LEADER_CLAIR",
+        "Lance" : "TRAINERCLASS_CHAMPION",
+        "Will" : "TRAINERCLASS_ELITE_FOUR_WILL",
+        "Karen" : "TRAINERCLASS_ELITE_FOUR_KAREN",
+        "Koga" : "TRAINERCLASS_ELITE_FOUR_KOGA",
+        "Cheryl (Partner)" : "TRAINERCLASS_PKMN_TRAINER_CHERYL",
+        "Riley (Partner)" : "TRAINERCLASS_PKMN_TRAINER_RILEY",
+        "Buck (Partner)" : "TRAINERCLASS_PKMN_TRAINER_BUCK",
+        "Mira (Partner)" : "TRAINERCLASS_PKMN_TRAINER_MIRA",
+        "Marley (Partner)" : "TRAINERCLASS_PKMN_TRAINER_MARLEY",
+        "Lucas" : "TRAINERCLASS_PKMN_TRAINER_FTR_LUCAS",
+        "Dawn" : "TRAINERCLASS_PKMN_TRAINER_FTR_DAWN",
+        "Palmer" : "TRAINERCLASS_TOWER_TYCOON",
+        "Brock" : "TRAINERCLASS_LEADER_BROCK",
+        "Argenta" : "TRAINERCLASS_HALL_MATRON",
+        "Thorton" : "TRAINERCLASS_FACTORY_HEAD",
+        "Dahlia" : "TRAINERCLASS_ARCADE_STAR",
+        "Darach" : "TRAINERCLASS_CASTLE_VALET",
+        "Misty" : "TRAINERCLASS_LEADER_MISTY",
+        "Lt. Surge" : "TRAINERCLASS_LEADER_LT_SURGE",
+        "Erika" : "TRAINERCLASS_LEADER_ERIKA",
+        "Janine" : "TRAINERCLASS_LEADER_JANINE",
+        "Sabrina" : "TRAINERCLASS_LEADER_SABRINA",
+        "Blaine" : "TRAINERCLASS_LEADER_BLAINE",
+        "Red" : "TRAINERCLASS_PKMN_TRAINER_RED",
+        "Blue" : "TRAINERCLASS_LEADER_BLUE",
+        "Bruno" : "TRAINERCLASS_ELITE_FOUR_BRUNO",
+        "Ariana" : "TRAINERCLASS_EXECUTIVE_ARIANA",
+        "Archer" : "TRAINERCLASS_EXECUTIVE_ARCHER",
+        "Proton" : "TRAINERCLASS_EXECUTIVE_PROTON",
+        "Petrel" : "TRAINERCLASS_EXECUTIVE_PETREL",
+        "Lance (Partner)" : "TRAINERCLASS_PKMN_TRAINER_LANCE",
+        "Giovanni" : "TRAINERCLASS_ROCKET_BOSS",
+        "Lucas DP" : "TRAINERCLASS_PKMN_TRAINER_LUCAS_DP",
+        "Dawn DP" : "TRAINERCLASS_PKMN_TRAINER_DAWN_DP",
+        "Lucas PT" : "TRAINERCLASS_PKMN_TRAINER_LUCAS_PT",
+        "Dawn PT" : "TRAINERCLASS_PKMN_TRAINER_DAWN_PT",
+    }
+
+    regularTrainerClasses = {
+        "Cyclist♂" : "TRAINERCLASS_CYCLIST_M",
+        "Cyclist♀" : "TRAINERCLASS_CYCLIST_F",
+        "Breeder♂" : "TRAINERCLASS_PKMN_BREEDER_M",
+        "Breeder♀" : "TRAINERCLASS_PKMN_BREEDER_F", 
+        "Pokéfan♂" : "TRAINERCLASS_POKEFAN_M",
+        "Pokéfan♀" : "TRAINERCLASS_POKEFAN",
+        "Poké Kid" : "TRAINERCLASS_POKE_KID",
+        "Ace Trainer♂" : "TRAINERCLASS_ACE_TRAINER_M",
+        "Ace Trainer♀" : "TRAINERCLASS_ACE_TRAINER_F",
+        "Bird Keeper DPPT" : "TRAINERCLASS_BIRD_KEEPER",
+        "Ranger♂" : "TRAINERCLASS_PKMN_RANGER_M",
+        "Ranger♀" : "TRAINERCLASS_PKMN_RANGER_F",
+        "Scientist DPPT" : "TRAINERCLASS_SCIENTIST",
+        "Swimmer♂" : "TRAINERCLASS_SWIMMER_M",
+        "Swimmer♀" : "TRAINERCLASS_SWIMMER_F",
+        "Tuber♂" : "TRAINERCLASS_TUBER_M",
+        "Tuber♀" : "TRAINERCLASS_TUBER_F",
+        "Psychic♂" : "TRAINERCLASS_PSYCHIC_M",
+        "Psychic♀" : "TRAINERCLASS_PSYCHIC_F",
+        "Ace Trainer DPPT♂" : "TRAINERCLASS_ACE_TRAINER_M_GS",
+        "Ace Trainer DPPT♀" : "TRAINERCLASS_ACE_TRAINER_F_GS",
+        "Rocket Grunt♂" : "TRAINERCLASS_TEAM_ROCKET",
+        "School Kid♂" : "TRAINERCLASS_SCHOOL_KID_M",
+        "School Kid♀" : "TRAINERCLASS_SCHOOL_KID_F",
+        "Rocket Grunt♀" : "TRAINERCLASS_TEAM_ROCKET_F",
+        "Poké Maniac" : "TRAINERCLASS_POKE_MANIAC",
+        "Bird Keeper" : "TRAINERCLASS_BIRD_KEEPER_GS",
+        "Scientist" : "TRAINERCLASS_SCIENTIST_GS",
+    }
+
+    if trname in specialTrainerClasses:
+        return specialTrainerClasses[trname]
+
+    if trclass in regularTrainerClasses:
+        return regularTrainerClasses[trclass]
+    
+    return "TRAINERCLASS_"+trclass.upper().replace(' ', '_')
+
+def ResolvePPCount(cell):
+
+    ppcount = 0
+
+    match = re.search(r"^(.*) - (\d+)$", cell)
+    if match:
+        move = match.group(1) 
+        ppcount = int(match.group(2))
+    else:
+        move = cell
+
+    return move, ppcount
