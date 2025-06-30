@@ -18,7 +18,7 @@ An easy-to-master and fast tool to edit hg-engine trainers using spreadsheets.
 
 You should now have ```folder/hg-engine``` and ```folder/rnbstyle-hge-editor```
 
-3. Create a copy of the [Run and Bun-Style sample sheet](https://docs.google.com/spreadsheets/d/1QQ9A7cZD-ivIZ9QNOgbUV2toyaC7QJ42lxEYZk_odos/edit?usp=sharing) on your Google Drive account.
+3. Create a copy of the [Run and Bun-Style Sample Sheet](https://docs.google.com/spreadsheets/d/1QQ9A7cZD-ivIZ9QNOgbUV2toyaC7QJ42lxEYZk_odos/edit?usp=sharing) on your Google Drive account.
 
 4. Customize the trainers the way you want following the [Editing Instructions](Instructions.md)
 
@@ -52,13 +52,19 @@ This tool supports every trainer customization parameter included in hg-engine :
 - Ball (Ball Type and Ball Seal)
 - Shiny
 - Status (Pré-Status)
-- Types (Custom Typing)
 - PP Counts
 - Nickname
+
+More details about the customization in the [Instructions](Instructions.md).
 
 ## Configure
 
 Configure the tool via the [Config file](config.py).
+
+## Future Development
+
+- More Customization of AI Flags
+- Wild Encounters Editor
 
 ## Contributions
 

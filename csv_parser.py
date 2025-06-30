@@ -34,7 +34,7 @@ def parse_csv(rows):
                 current.id = 0
 
             tags = re.findall(r'\[.*?]', row[1])
-            if "Double" in tags:
+            if "[Double]" in tags:
                 current.battletype = True
 
             cleaned_str = re.sub(r'\s*\[.*?\]\s*$', '', row[1])

@@ -1,9 +1,14 @@
+,Route 30,,,,,
+Name - 47,Youngster Mikey [Showcases Minimal Required Fields],,,,,
+Pokémon,,,,,,
+,Sentret,,,,,
+Level,2,,,,,
 ,Route 31,,,,,
-Name - 4,Bug Catcher Wade [Showcases DV and Ability Slots],,,,,
+Name - 4,"Bug Catcher Wade [Double] [Showcases DV, Ability Slots and Double Battles]",,,,,
 Pokémon,,,,,,
 ,Sewaddle,Venipede,,,,
 Level,3,3,,,,
-DV,0,69,,,,
+DV,0,50,,,,
 Ability Slot,0,1,,,,
 ,Route 38,,,,,
 Name - 82,"Bird Keeper Toby [Showcases Pré-Status, Custom IVs/EVs Spreads, Custom PP Counts]",,,,,
@@ -39,7 +44,7 @@ Pokémon,,,,,,
 Level,30,69,,,,
 Ability,Wonder Guard,Adaptability,,,,
 Stats,-,"1, 999 ,1, 999, 1, 1",,,,
-Moves,Explosion,Scratch,,,,
+Moves,Fury Swipes,Scratch,,,,
 ,-,-,,,,
 ,-,-,,,,
 ,-,-,,,,
@@ -55,3 +60,17 @@ Moves,Stone Edge,Draco Meteor,Dragon Hammer,Fire Blast,Outrage,Waterfall
 ,Tailwind,Hydro Pump,Wood Hammer,Dragon Pulse,Extreme Speed,Crunch
 ,Earthquake,Ice Beam,Ancient Power,Focus Blast,Fire Punch,Earthquake
 ,Thunder Fang,Signal Beam,Psyshock,Air Slash,Dual Wingbeat,Iron Head
+,Lily of the Valley,,,,,
+Name - 11,Ace Trainer♂ Memory5ty7 [Double] [Boss] [Optional] [Showcases New Trainer Additions],,,,,
+Pokémon,,,,,,
+,Drapion,Breloom*,Dracovish,Eelektross,Typhlosion,Gengar-M*
+Level,87,88,87,87,87,89
+Held Item,Black Sludge,Eject Button,Choice Band,White Herb,Choice Specs,Gengarite
+Ability,Battle Armor,Poison Heal,Strong Jaw,Levitate,Flash Fire,Levitate
+Nature,Impish,Adamant,Adamant,Jolly,Timid,Timid
+Status,-,Poisoned,-,-,-,-
+Ball Seal,,,,4,,
+Moves,Crunch,Seed Bomb,Liquidation,Supercell Slam,Eruption,Shadow Ball
+,Breaking Swipe,Spore,Dragon Rush,Close Combat,Focus Blast,Sludge Bomb
+,Aqua Tail,Close Combat,Crunch,Dragon Claw,Scorching Sands,Focus Blast
+,Ice Fang,Facade,Psychic Fangs,Super Fang,Shadow Ball,Thunderbolt

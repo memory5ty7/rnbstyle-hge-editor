@@ -36,7 +36,7 @@ class Config:
     DEFAULT_DV = 255
 
     # Use custom IV/EV values instead of DV even if there are no "IV" or "EV" rows
-    USE_IV_EV = False
+    USE_IV_EV = True
     DEFAULT_IVS = [31, 31, 31, 31, 31, 31] # HP, ATK, DEF, SPD, SPATK, SPDEF
     DEFAULT_EVS = [0, 0, 0, 0, 0, 0]       # HP, ATK, DEF, SPD, SPATK, SPDEF
 
