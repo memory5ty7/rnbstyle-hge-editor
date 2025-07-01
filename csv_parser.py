@@ -41,7 +41,7 @@ def parse_csv(rows):
             words = cleaned_str.split()
 
             # Handle Double Battle Classes (Twins, etc.)
-            if '&' in cleaned_str:
+            if ' & ' in cleaned_str:
                 name_words = 3
             else:
                 name_words = 1
@@ -66,7 +66,7 @@ def parse_csv(rows):
                     break
                 next_row = rows[i + 1]
                 for j, cell in enumerate(next_row[1:]):
-                    if(cell != ''):
+                    if cell != '':
                         current.party.append(TrainerMon())
                         if cell.endswith('*'):
                             cell = cell[:-1]
@@ -76,7 +76,7 @@ def parse_csv(rows):
                         current.nummons += 1
             case "Held Item":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
-                    if cell != "-":
+                    if cell != "-" and cell != "":
                         current.party[j].item = cell
                         current.party[j].pokemon, current.party[j].item = ResolveItemForm(current.party[j].pokemon, current.party[j].item)
                 current.trainermontype.add("TRAINER_DATA_TYPE_ITEMS")
@@ -86,7 +86,7 @@ def parse_csv(rows):
                         break
                     move_row = rows[i + k]
                     for j, cell in enumerate(move_row[1:1 + current.nummons]):
-                        if cell != "-":
+                        if cell != "-" and cell != "":
                             current.party[j].move[k], current.party[j].ppcounts[k] = ResolvePPCount(cell)
                             if current.party[j].ppcounts[k] != 0:
                                 current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_PP_COUNTS")
@@ -114,13 +114,13 @@ def parse_csv(rows):
                 current.trainermontype.add("TRAINER_DATA_TYPE_NATURE_SET")
             case "Status":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
-                    if cell != "-":
+                    if cell != "-" and cell != "":
                         current.party[j].status = cell
                         current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_STATUS")
                     current.trainermontype.add("TRAINER_DATA_TYPE_ADDITIONAL_FLAGS")
             case "Stats":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
-                    if cell != '-':
+                    if cell != '-' and cell != "":
                         current.party[j].stats = [int(x) for x in cell.split(',')]
                         current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_HP")
                         current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_ATK")
@@ -140,13 +140,13 @@ def parse_csv(rows):
             #         current.trainermontype.add("TRAINER_DATA_TYPE_ADDITIONAL_FLAGS")
             case "Nickname":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
-                    if cell != "-":
+                    if cell != "-" and cell != "":
                         current.party[j].nickname = cell
                         current.party[j].additionalFlags.append("TRAINER_DATA_EXTRA_TYPE_NICKNAME")
                     current.trainermontype.add("TRAINER_DATA_TYPE_ADDITIONAL_FLAGS")
             case "Ball Seal":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
-                    if cell != "-":
+                    if cell != "-" and cell != "":
                         current.party[j].ballseal = cell
             # case "Shiny":
             case "":

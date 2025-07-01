@@ -57,19 +57,15 @@ This tool supports every trainer customization parameter included in hg-engine :
 
 More details about the customization in the [Instructions](Instructions.md).
 
-## Configure
+## Configuration
 
 Configure the tool via the [Config file](config.py).
 
 ## Future Development
 
 - More Customization of AI Flags
+- More Customization of Trainer Items
 - Wild Encounters Editor
-
-## Contributions
-
-If you want to contribute to this project, feel free to open a Pull Request.
-Every contribution is welcome !
 
 # Credits
 
