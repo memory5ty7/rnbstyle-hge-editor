@@ -251,6 +251,10 @@ If a *Nickname* row is present, the Pokémon will have the specified nickname. T
 
 You can freely add Area Names to the Sheets. As long as the cell of the first column is empty, the cell will be disregarded by the parser.
 
+#### Splits
+
+If you want to split the documentation into different parts, just duplicate an already formatted Sheet. The tool will convert every csv file in the [csv folder](csv/), it is therefore perfectly compatible with a split documentation.
+
 ### Formatting
 
 The Sheets are already formatted "correctly" and the Blank Sheet should be more than enough to write everything you want.
@@ -265,7 +269,7 @@ Here are some useful shortcuts you might have to use :
 
 ## Inserting Trainers into the Game
 
-Download the Sheet you want in .csv format in place it in the .csv folder of rnbstyle-hge-editor. The tool will read **every CSV file in that folder**.
+Download the Sheet you want in .csv format in place it in the .csv folder of rnbstyle-hge-editor. The file you get should be quite similar to the [Example File](csv/Example.csv). The tool will read **every CSV file in that folder**.
 
 Run main.py in the *rnbstyle-hge-editor* folder. The tool will do a validity check for these parameters and tell you if anything is wrong :
 - Trainer Mon Type
