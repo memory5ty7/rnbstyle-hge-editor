@@ -1,7 +1,7 @@
-from trainer import TrainerData, TrainerMon
 from typing import List
-from resolve import ResolveMove, ResolveAbility, ResolveItem, ResolveBall, ResolveNature, ResolveStatus, ResolveTypes, ResolveNickname, ResolveTrainerClass
-from validity_checker import CheckTrainerValidity
+from common.trainer import TrainerData, TrainerMon
+from common.resolve import ResolveMove, ResolveAbility, ResolveItem, ResolveBall, ResolveNature, ResolveStatus, ResolveTypes, ResolveNickname, ResolveTrainerClass
+from csvhge.validity_checker import CheckTrainerValidity
 
 def print_data(data: List[TrainerData], output_file: str):
     with open(output_file, 'r', encoding='utf-8') as f:

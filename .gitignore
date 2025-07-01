@@ -4,3 +4,5 @@ data/*
 include/*
 scripts/*
 gitignore
+*.pyc
+*/__pycache__

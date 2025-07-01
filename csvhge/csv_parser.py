@@ -1,9 +1,9 @@
-from resolve import ResolvePokemon, ResolveItemForm, ResolvePPCount
-from trainer import TrainerData, TrainerMon
-from config import Config
 import re
 import os
 import csv
+from common.resolve import ResolvePokemon, ResolveItemForm, ResolvePPCount
+from common.trainer import TrainerData, TrainerMon
+from config import Config
 
 def list_csv_files(directory):
     return [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(".csv")]

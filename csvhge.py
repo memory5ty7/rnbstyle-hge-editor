@@ -1,8 +1,8 @@
 from config import Config
-from csv_parser import list_csv_files, read_csv, parse_csv
-from export import print_data
-from validity_checker import init_defines
-from file_manager import create_backup
+from csvhge.csv_parser import list_csv_files, read_csv, parse_csv
+from csvhge.export import print_data
+from csvhge.validity_checker import init_defines
+from csvhge.file_manager import create_backup
 
 def main():
     init_defines()

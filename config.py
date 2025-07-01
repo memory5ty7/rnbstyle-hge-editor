@@ -42,3 +42,10 @@ class Config:
 
     # Default Ball if there is no "Ball" row
     DEFAULT_BALL = "ITEM_POKE_BALL"
+
+    # hgecsv Configuration
+    DEFAULT_INPUT_FILE = TRAINER_DIR + "trainers.s"
+    DEFAULT_OUTPUT_FILE = "trainers.csv"
+
+    # print IVs/EVs (this includes automatically written IVs/EVs when USE_IV_EV is True)
+    PRINT_IVS_EVS = False

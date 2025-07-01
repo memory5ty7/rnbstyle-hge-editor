@@ -1,7 +1,7 @@
-from config import Config
-from header_parser import extract_defines
-from trainer import TrainerData, TrainerMon
 from typing import List, Tuple, Set
+from config import Config
+from csvhge.header_parser import extract_defines
+from common.trainer import TrainerData, TrainerMon
 
 abilityDefines = []
 battleDefines = []

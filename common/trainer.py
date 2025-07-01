@@ -12,8 +12,8 @@ class TrainerMon:
     move: List[str] = field(default_factory=lambda: ["MOVE_NONE", "MOVE_NONE", "MOVE_NONE", "MOVE_NONE"])
     ability: str = "ABILITY_NONE"
     ball: str = Config.DEFAULT_BALL
-    setivs: List[int] = field(default_factory=lambda: Config.DEFAULT_IVS.copy)
-    setevs: List[int] = field(default_factory=lambda: Config.DEFAULT_EVS.copy)
+    setivs: List[int] = field(default_factory=lambda: Config.DEFAULT_IVS.copy())
+    setevs: List[int] = field(default_factory=lambda: Config.DEFAULT_EVS.copy())
     nature: str = "NATURE_HARDY"
     shinylock: bool = False
     # Additional flags
