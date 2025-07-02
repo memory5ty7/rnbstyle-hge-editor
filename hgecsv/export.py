@@ -5,6 +5,8 @@ from common.trainer import TrainerData, TrainerMon
 from common.resolve import ResolvePokemonToCSV, ResolveItemToCSV, ResolveAbilityToCSV, ResolveNatureToCSV, ResolveStatusToCSV, ResolveMoveToCSV, ResolveTrainerClassToCSV
 from config import Config
 
+current_row = 0
+
 def print_data(data: List[TrainerData], output_file: str):
     for trainer in data:
         output_file.write(trainerdata_to_csv(trainer))
@@ -37,6 +39,7 @@ labelsFlagsExclude = {
 }
 
 def trainerdata_to_csv(trainer: TrainerData) -> str:
+    global current_row
 
     output = io.StringIO()
     writer = csv.writer(output)
@@ -45,13 +48,19 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
         writer.writerow(["Name - " + str(trainer.id), ResolveTrainerClassToCSV(trainer.trainerclass, trainer.name) + " " + trainer.name+" [Double]"])
     else:
         writer.writerow(["Name - " + str(trainer.id), ResolveTrainerClassToCSV(trainer.trainerclass, trainer.name) + " " + trainer.name])
+    current_row += 1
 
-    writer.writerow(["Pokémon"]+[""]*6)
+    writer.writerow(
+        ["Pokémon"] + 
+        getMonFormula(current_row + 2, [i + 2 for i in range(6)]) + 
+        getTrainerFormula(current_row, 2)
+    )
     writer.writerow([""] + [
 
         ResolvePokemonToCSV(mon, ResolveItemToCSV(mon.item), mon.shinylock)
         for mon in trainer.party
         ])
+    current_row += 2
     
     rows = [
         ("Level", [
@@ -127,6 +136,7 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
 
 
         writer.writerow([label] + values)
+        current_row += 1
 
     if "TRAINER_DATA_TYPE_MOVES" in trainer.trainermontype:
         # Move 0
@@ -136,6 +146,7 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
             if idx < trainer.nummons and len(mon.move) > 0 else ""
             for idx, mon in enumerate(trainer.party)
         ])
+        current_row += 1
 
         # Moves 1 to 3
         for move_idx in range(1, 4):
@@ -145,6 +156,7 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
                 if idx < trainer.nummons and len(mon.move) > move_idx else ""
                 for idx, mon in enumerate(trainer.party)
             ])
+            current_row += 1
 
 
 
@@ -159,3 +171,28 @@ def get_or_dash(attr_list: List, index: int):
     if isinstance(v, int) and v == 0:
         return "-"
     return v
+
+def int_to_letter(n: int) -> str:
+    result = ""
+    while n > 0:
+        n, remainder = divmod(n - 1, 26)
+        result = chr(65 + remainder) + result
+    return result
+
+def getMonFormula(row, cols):
+    formulas = []
+    for col in cols:
+        cell = int_to_letter(col) + str(row)
+        formula = (
+            f'\'=SIERREUR(SI(DROITE({cell};1)=\"\";'
+            f'INDEX(\'Pokémon\'!$C:$C; EQUIV(VRAI; INDEX(MINUSCULE(\'Pokémon\'!$A:$A)=MINUSCULE(GAUCHE({cell};NBCAR({cell})-1)); 0); 0));'
+            f'INDEX(\'Pokémon\'!$B:$B; EQUIV(VRAI; INDEX(MINUSCULE(\'Pokémon\'!$A:$A)=MINUSCULE({cell}); 0); 0)));'
+            f'SI(ESTTEXTE({cell}); \'Pokémon\'!$B$2; \"\"))'
+        )
+        formulas.append(formula)
+    return formulas
+
+def getTrainerFormula(row, col):
+    cell = int_to_letter(col) + str(row)
+    formula = (f'\'=LET(cleanStr; REGEXREPLACE(${cell}; \" ?\\[[^\\]]*\\]\"; \"\");mots; SPLIT(cleanStr; \" \");nbMots; NBVAL(mots);contientEt; ESTNUM(CHERCHE(\" & \"; cleanStr));classPart; SI(contientEt;INDEX(mots; 1);SI(nbMots > 1;GAUCHE(cleanStr;TROUVE(\"☃\";SUBSTITUE(cleanStr; \" \"; \"☃\"; nbMots - 1)) - 1);\"\"));lastPart; SI(contientEt;SI(nbMots >= 3;INDEX(mots; nbMots-2) & \" \" & INDEX(mots; nbMots-1) & \" \" & INDEX(mots; nbMots);cleanStr);SI(nbMots > 1;DROITE(cleanStr;NBCAR(cleanStr) - TROUVE(\"☃\";SUBSTITUE(cleanStr; \" \"; \"☃\"; nbMots - 1)));cleanStr));resultat1; RECHERCHEX(SUPPRESPACE(classPart); Trainers!$B:$B; Trainers!$C:$C; \"\");resultat2; RECHERCHEX(SUPPRESPACE(classPart); Trainers!$B:$B; Trainers!$C:$C; Trainers!$C$2);resultat3; RECHERCHEX(SUPPRESPACE(lastPart); Trainers!$B:$B; Trainers!$C:$C; Trainers!$C$2);SI(resultat1 <> \"\"; resultat2; resultat3))')
+    return [formula]
