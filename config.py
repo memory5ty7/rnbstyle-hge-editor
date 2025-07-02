@@ -2,9 +2,12 @@ class Config:
     # Directories and file paths
     INPUT_DIR = "csv"
     ROOT_DIR = "../hg-engine/"
+    DATA_DIR = "armips/data/"
 
     # hg-engine directories
-    TRAINER_DIR = ROOT_DIR + "armips/data/trainers/"
+    TRAINER_DIR = ROOT_DIR + DATA_DIR + "trainers/"
+    MONDATA_FILE = ROOT_DIR + DATA_DIR + "mondata.s"
+    LEARNSETS_FILE = ROOT_DIR + DATA_DIR + "levelupdata.s"
     OUTPUT_FILE = TRAINER_DIR + "trainers.s"
 
     # If set to True, a copy of trainers.s will be created before priting the trainers
@@ -20,6 +23,7 @@ class Config:
     TRAINERCLASS_HEADER = CONSTANTS_DIR + "trainerclass.h"
     BATTLE_HEADER = INCLUDE_DIR + "battle.h"
     POKEMON_HEADER = INCLUDE_DIR + "pokemon.h"
+
     
     # Trainer Configuration
 
@@ -43,9 +47,39 @@ class Config:
     # Default Ball if there is no "Ball" row
     DEFAULT_BALL = "ITEM_POKE_BALL"
 
+
     # hgecsv Configuration
     DEFAULT_INPUT_FILE = TRAINER_DIR + "trainers.s"
     DEFAULT_OUTPUT_FILE = "trainers.csv"
 
-    # print IVs/EVs (this includes automatically written IVs/EVs when USE_IV_EV is True)
-    PRINT_IVS_EVS = False
+    # Which rows to print if the corresponding row is present
+    ROWS_TO_PRINT = {
+        "DV" : True,
+        "Ability Slot" : True,
+        "Level" : True,
+        "Pokémon" : True,
+        "Held Item" : True,
+        "Moves" : True,
+        "Ability" : True,
+        "Ball Type" : True,
+        "IVs" : True,
+        "EVs" : True,
+        "Nature" : True,
+        "Status" : True,
+        "Stats" : True,
+        "Nickname" : True,
+        "Ball Seal" : True,
+    }
+
+    # Print Ability instead of Ability Slot
+    PRINT_ABILITY_ABILITY_SLOT = True
+
+    # Print IVs instead of DVs
+    PRINT_IV_DV = True
+
+    # Print Moves when the moves are the default level-up ones
+    PRINT_MOVES_DEFAULT = True
+
+    # Print Nature even if there is no "Nature" row
+    PRINT_NATURE_DEFAULT = True
+    

@@ -4,6 +4,7 @@ from typing import List
 from common.trainer import TrainerData, TrainerMon
 from common.resolve import ResolvePokemonToCSV, ResolveItemToCSV, ResolveAbilityToCSV, ResolveNatureToCSV, ResolveStatusToCSV, ResolveMoveToCSV, ResolveTrainerClassToCSV
 from config import Config
+from .mon_parser import mons
 
 current_row = 0
 
@@ -38,6 +39,11 @@ labelsFlagsExclude = {
     "Ability Slot" : "TRAINER_DATA_TYPE_ABILITY",
 }
 
+labelReplaceValues = {
+    "DVs" : (Config.PRINT_IV_DV, "IVs"),
+    "Ability Slot" : (Config.PRINT_ABILITY_ABILITY_SLOT, "Ability")
+}
+
 def trainerdata_to_csv(trainer: TrainerData) -> str:
     global current_row
 
@@ -61,19 +67,25 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
         for mon in trainer.party
         ])
     current_row += 2
-    
+
     rows = [
         ("Level", [
             get_or_dash([mon.level for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
         ]),
-        ("DV", [
-            get_or_dash([mon.dv for mon in trainer.party], i) if i < trainer.nummons else ""
+        ("DVs", [
+            (
+            (str(int(int(mon.dv) * 31 / 255))) if Config.PRINT_IV_DV else mon.dv
+            ) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
+            for mon in [trainer.party[i]]
         ]),
         ("Ability Slot", [
-            get_or_dash([mon.abilityslot for mon in trainer.party], i) if i < trainer.nummons else ""
+            (
+                (ResolveAbilityToCSV(mons[mon.pokemon[0]].abilities[int(int(mon.abilityslot) / 32)])) if Config.PRINT_ABILITY_ABILITY_SLOT else mon.abilityslot
+            ) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
+            for mon in [trainer.party[i]]
         ]),
         ("Held Item", [
             get_or_dash([ResolveItemToCSV(mon.item) for mon in trainer.party], i) if i < trainer.nummons else ""
@@ -119,7 +131,7 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
 
     for label, values in rows:
         if label in labelsFlags and labelsFlags[label] not in trainer.trainermontype:
-            continue
+           continue
 
         if label in labelsFlagsExclude.keys() and labelsFlagsExclude[label] in trainer.trainermontype:
             continue
@@ -128,12 +140,14 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
             if not any(labelsAdditionalFlags[label] in mon.additionalFlags for mon in trainer.party[:trainer.nummons]):
                 continue
 
-        if label == "IVs" or label == "EVs" and Config.PRINT_IVS_EVS == False:
-            continue
+        if label in Config.ROWS_TO_PRINT.keys() and Config.ROWS_TO_PRINT[label] == False:
+           continue
 
         if label == "Ball Seal" and all(v == "0" or v == "" for v in values):
             continue
 
+        if label in labelReplaceValues and labelReplaceValues[label][0]:
+            label = labelReplaceValues[label][1]
 
         writer.writerow([label] + values)
         current_row += 1
@@ -157,10 +171,48 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
                 for idx, mon in enumerate(trainer.party)
             ])
             current_row += 1
+    elif Config.PRINT_MOVES_DEFAULT:
+        for move_idx in range(4):
+            writer.writerow(
+                ["Moves" if move_idx == 0 else ""] + [
+                    # Get last 4 moves filtered by level for this mon's species
+                    (
+                        # Retrieve the moves once per mon
+                        # Then pick the current move index if exists
+                        (
+                            lambda moves, idx=move_idx, mon=mon: (
+                                ResolveMoveToCSV(moves[idx][0]) +
+                                (
+                                    f" - {mon.ppcounts[idx]}"
+                                    if "TRAINER_DATA_EXTRA_TYPE_PP_COUNTS" in mon.additionalFlags and moves[idx][0] != "MOVE_NONE"
+                                    else ""
+                                )
+                            ) if idx < len(moves) else ""
+                        )(get_last_moves(mon.pokemon[0], mon.level, mons), move_idx)
+                    ) if idx < trainer.nummons else ""
+                    for idx, mon in enumerate(trainer.party)
+                ]
+            )
+            current_row += 1
 
 
 
     return output.getvalue()
+
+def get_last_moves(species: str, level: int, mons_dict: dict, n_moves: int = 4):
+    mon = mons_dict.get(species)
+    if not mon:
+        return []
+
+    # Filter moves at or below the level
+    filtered_moves = [move for move in mon.learnset if move[1] <= int(level)]
+
+    # Sort by level descending
+    filtered_moves.sort(key=lambda m: m[1], reverse=True)
+
+    # Take the first n_moves (which are highest levels <= level)
+    return filtered_moves[:n_moves]
+
 
 def get_or_dash(attr_list: List, index: int):
     if index >= len(attr_list):

@@ -13,6 +13,7 @@ It is composed of 4 different sheets :
 - Pokémon
 - Trainers
 - Example
+- Vanilla
 - Blank Sheet
 
 ### Pokémon Sheet
@@ -48,6 +49,10 @@ This sheet contains some examples of working trainers you can already export to 
 ### Blank Sheet
 
 This Sheet can be the starting point of your project. This sheet is already correctly formatted and every formula is already present. You should always keep a backup of in case you remove the formulas or mess up the formatting or editing.
+
+### Vanilla Sheet
+
+This Sheet contains every Vanilla trainer in hg-engine.
 
 ## Editing Trainers
 

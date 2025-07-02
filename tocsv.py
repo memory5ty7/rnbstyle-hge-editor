@@ -2,6 +2,7 @@ import argparse
 from config import Config
 from hgecsv.s_parser import parse_s
 from hgecsv.export import print_data
+from hgecsv.mon_parser import parse_mons, mons
 
 def main():
     parser = argparse.ArgumentParser(description="Convert an hg-engine Trainers file to a correctly formatted Spreadsheet")
@@ -11,6 +12,8 @@ def main():
     args = parser.parse_args()
 
     try:
+        parse_mons(Config.MONDATA_FILE, Config.LEARNSETS_FILE)
+
         with open(args.filename, 'r') as infile:
             rows = infile.read().splitlines()
             trainers = parse_s(rows)

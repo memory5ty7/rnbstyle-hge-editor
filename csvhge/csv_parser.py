@@ -101,9 +101,11 @@ def parse_csv(rows):
                     current.party[j].ball = cell
                 current.trainermontype.add("TRAINER_DATA_TYPE_BALL")
             case "IVs":
-                for j, cell in enumerate(row[1:1 + current.nummons]):
-                    current.party[j].setivs = [int(x) for x in cell.split(',')]
-                current.trainermontype.add("TRAINER_DATA_TYPE_IV_EV_SET")
+                if "," in cell:
+                    current.party[j].setivs = [int(x.strip()) for x in cell.split(',')]
+                else:
+                    val = int(cell.strip())
+                    current.party[j].setivs = [val] * 6
             case "EVs":
                 for j, cell in enumerate(row[1:1 + current.nummons]):
                     current.party[j].setivs = [int(x) for x in cell.split(',')]

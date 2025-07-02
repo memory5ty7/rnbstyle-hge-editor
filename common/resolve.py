@@ -335,6 +335,15 @@ megaStones = {
     ("Diancie", 1) : "Diancite",
 }
 
+specialMegaStones = {
+    ("Charizard", "Charizardite X") : "Charizard-M-X",
+    ("Charizard", "Charizardite Y") : "Charizard-M-Y",
+    ("Mewtwo", "Mewtwonite X") : "Mewtwo-M-X",
+    ("Mewtwo", "Mewtwonite Y") : "Mewtwo-M-Y",
+    ("Groudon", "Red Orb") : "Groudon-P",
+    ("Kyogre", "Blue Orb") : "Kyogre-P",
+}
+
 def ResolvePokemon(cell):
     pokemon = (cell, 0)
 
@@ -364,6 +373,8 @@ def ResolvePokemonToCSV(mon, item, shinylock):
     species = next((k for k, v in forms.items() if v == (species, int(form))), species)
 
     
+    species = specialMegaStones.get((species, item), species)
+
     if any(s == species and v == item for (s, f), v in megaStones.items()):
         species += "-M"
 
