@@ -26,10 +26,13 @@ def parse_mons(mondata_file, learnsets_file):
                             mons[current_species] = Pokemon(species=current_species)
                             mons[current_species].species = current_species
                             mons[current_species].learnset =[('MOVE_NONE', 0), ('MOVE_NONE', 0), ('MOVE_NONE', 0), ('MOVE_NONE', 0)]
-                    case "abilities":
-                        if current_species not in mons:
-                            mons[current_species] = Pokemon(species=current_species)
+                    case "abilities":                            
                         mons[current_species].abilities = [x.strip() for x in value.split(",")]
+                        
+                        if mons[current_species].abilities[1] == "ABILITY_NONE":
+                            mons[current_species].abilities[1] = mons[current_species].abilities[0]   
+                    case _:
+                        continue                    
 
                 if len(value) == 1:
                     current_species = value

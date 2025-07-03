@@ -5,6 +5,8 @@ from common.trainer import TrainerData, TrainerMon
 from common.resolve import ResolvePokemonToCSV, ResolveItemToCSV, ResolveAbilityToCSV, ResolveNatureToCSV, ResolveStatusToCSV, ResolveMoveToCSV, ResolveTrainerClassToCSV
 from config import Config
 from .mon_parser import mons
+from common.header_parser import trainerClassDefines, speciesDefines, natureDefines
+from common.c_parser import trainerGenders
 
 current_row = 0
 
@@ -12,36 +14,19 @@ def print_data(data: List[TrainerData], output_file: str):
     for trainer in data:
         output_file.write(trainerdata_to_csv(trainer))
 
-def getRow(label, trainer):
-    return (str(label), [
-            get_or_dash([mon.level for mon in trainer.party], i) if i < trainer.nummons else ""
-            for i in range(len(trainer.party))
-        ]),
-
-labelsFlags = {
-    "Ability" : "TRAINER_DATA_TYPE_ABILITY",
-    "Held Item" : "TRAINER_DATA_TYPE_ITEMS",
-    "Ball" : "TRAINER_DATA_TYPE_BALL",
-    "IVs" : "TRAINER_DATA_TYPE_IV_EV_SET",
-    "EVs" : "TRAINER_DATA_TYPE_IV_EV_SET",
-    "Nature" : "TRAINER_DATA_TYPE_NATURE_SET",
-    "Ball Type" : "TRAINER_DATA_TYPE_BALL"
-}
-
-labelsAdditionalFlags = {
-    "Status" : "TRAINER_DATA_EXTRA_TYPE_STATUS",
-    "Stats" : "TRAINER_DATA_EXTRA_TYPE_HP",
-    "Nickname" : "TRAINER_DATA_EXTRA_TYPE_NICKNAME",
-}
-
-labelsFlagsExclude = {
-    "DV" : "TRAINER_DATA_TYPE_IV_EV_SET",
-    "Ability Slot" : "TRAINER_DATA_TYPE_ABILITY",
-}
-
 labelReplaceValues = {
-    "DVs" : (Config.PRINT_IV_DV, "IVs"),
-    "Ability Slot" : (Config.PRINT_ABILITY_ABILITY_SLOT, "Ability")
+    "DV" : (Config.PRINT_IVS, "IVs"),
+    "Ability Slot" : (Config.PRINT_ABILITY, "Ability")
+}
+
+flagDependentValues = {
+    "IVs" : "TRAINER_DATA_TYPE_IV_EV_SET",
+    "Ability" : "TRAINER_DATA_TYPE_ABILITY",
+}
+
+replacedValues = {
+    "DV": "TRAINER_DATA_TYPE_IV_EV_SET",
+    "Ability Slot" : "TRAINER_DATA_TYPE_ABILITY"
 }
 
 def trainerdata_to_csv(trainer: TrainerData) -> str:
@@ -73,31 +58,34 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
             get_or_dash([mon.level for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
         ]),
-        ("DVs", [
-            (
-            (str(int(int(mon.dv) * 31 / 255))) if Config.PRINT_IV_DV else mon.dv
-            ) if i < trainer.nummons else ""
-            for i in range(len(trainer.party))
-            for mon in [trainer.party[i]]
-        ]),
         ("Ability Slot", [
             (
-                (ResolveAbilityToCSV(mons[mon.pokemon[0]].abilities[int(int(mon.abilityslot) / 32)])) if Config.PRINT_ABILITY_ABILITY_SLOT else mon.abilityslot
+                (ResolveAbilityToCSV(mons[mon.pokemon[0]].abilities[int(int(mon.abilityslot) / 32) % 2])) if Config.PRINT_ABILITY else mon.abilityslot
             ) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
             for mon in [trainer.party[i]]
-        ]),
-        ("Held Item", [
-            get_or_dash([ResolveItemToCSV(mon.item) for mon in trainer.party], i) if i < trainer.nummons else ""
-            for i in range(len(trainer.party))
         ]),
         ("Ability", [
             get_or_dash([ResolveAbilityToCSV(mon.ability) for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
         ]),
-        ("Nature", [
-            get_or_dash([ResolveNatureToCSV(mon.nature) for mon in trainer.party], i) if i < trainer.nummons else ""
+        ("Held Item", [
+            get_or_dash([ResolveItemToCSV(mon.item) for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
+        ]),
+        ("Nature", [
+            (
+                ResolveNatureToCSV(mon.nature) if ("TRAINER_DATA_TYPE_NATURE_SET" in trainer.trainermontype) else ResolveNatureToCSV(calcMonNature(trainer, mon))
+            ) if i < trainer.nummons else ""
+            for i in range(len(trainer.party))
+            for mon in [trainer.party[i]]
+        ]),
+        ("DV", [
+            (
+            (str(int(int(mon.dv) * 31 / 255))) if Config.PRINT_IVS else mon.dv
+            ) if i < trainer.nummons else ""
+            for i in range(len(trainer.party))
+            for mon in [trainer.party[i]]
         ]),
         ("IVs", [
             get_or_dash([",".join(str(ev) for ev in mon.setevs) for mon in trainer.party], i) if i < trainer.nummons else ""
@@ -107,12 +95,12 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
             get_or_dash([",".join(str(ev) for ev in mon.setevs) for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
         ]),
-        ("Status", [
-            get_or_dash([ResolveStatusToCSV(mon.status) for mon in trainer.party], i) if i < trainer.nummons else ""
-            for i in range(len(trainer.party))
-        ]),
         ("Stats", [
             get_or_dash([",".join(str(stat) for stat in mon.stats) for mon in trainer.party], i) if i < trainer.nummons else ""
+            for i in range(len(trainer.party))
+        ]),
+        ("Status", [
+            get_or_dash([ResolveStatusToCSV(mon.status) for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
         ]),
         ("Ball Type", [
@@ -122,32 +110,25 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
         ("Ball Seal", [
             get_or_dash([mon.ballseal for mon in trainer.party], i) if i < trainer.nummons else ""
             for i in range(len(trainer.party))
-        ])
-        # ("Nickname", [
-        #     get_or_dash([mon.ballseal for mon in trainer.party], i) if i < trainer.nummons else ""
-        #     for i in range(len(trainer.party))
-        # ]),
+        ]),
+        ("Nickname", [
+            get_or_dash([mon.nickname for mon in trainer.party], i) if i < trainer.nummons else ""
+            for i in range(len(trainer.party))
+        ]),
     ]
 
     for label, values in rows:
-        if label in labelsFlags and labelsFlags[label] not in trainer.trainermontype:
-           continue
-
-        if label in labelsFlagsExclude.keys() and labelsFlagsExclude[label] in trainer.trainermontype:
+        if label in replacedValues and replacedValues[label] in trainer.trainermontype:
             continue
 
-        if label in labelsAdditionalFlags:
-            if not any(labelsAdditionalFlags[label] in mon.additionalFlags for mon in trainer.party[:trainer.nummons]):
-                continue
-
-        if label in Config.ROWS_TO_PRINT.keys() and Config.ROWS_TO_PRINT[label] == False:
-           continue
-
-        if label == "Ball Seal" and all(v == "0" or v == "" for v in values):
+        if label in flagDependentValues and flagDependentValues[label] not in trainer.trainermontype:
             continue
 
         if label in labelReplaceValues and labelReplaceValues[label][0]:
             label = labelReplaceValues[label][1]
+
+        if label in Config.ROWS_TO_PRINT.keys() and Config.ROWS_TO_PRINT[label] == False:
+           continue
 
         writer.writerow([label] + values)
         current_row += 1
@@ -171,14 +152,11 @@ def trainerdata_to_csv(trainer: TrainerData) -> str:
                 for idx, mon in enumerate(trainer.party)
             ])
             current_row += 1
-    elif Config.PRINT_MOVES_DEFAULT:
+    else:
         for move_idx in range(4):
             writer.writerow(
                 ["Moves" if move_idx == 0 else ""] + [
-                    # Get last 4 moves filtered by level for this mon's species
                     (
-                        # Retrieve the moves once per mon
-                        # Then pick the current move index if exists
                         (
                             lambda moves, idx=move_idx, mon=mon: (
                                 ResolveMoveToCSV(moves[idx][0]) +
@@ -204,13 +182,9 @@ def get_last_moves(species: str, level: int, mons_dict: dict, n_moves: int = 4):
     if not mon:
         return []
 
-    # Filter moves at or below the level
     filtered_moves = [move for move in mon.learnset if move[1] <= int(level)]
-
-    # Sort by level descending
     filtered_moves.sort(key=lambda m: m[1], reverse=True)
 
-    # Take the first n_moves (which are highest levels <= level)
     return filtered_moves[:n_moves]
 
 
@@ -248,3 +222,45 @@ def getTrainerFormula(row, col):
     cell = int_to_letter(col) + str(row)
     formula = (f'\'=LET(cleanStr; REGEXREPLACE(${cell}; \" ?\\[[^\\]]*\\]\"; \"\");mots; SPLIT(cleanStr; \" \");nbMots; NBVAL(mots);contientEt; ESTNUM(CHERCHE(\" & \"; cleanStr));classPart; SI(contientEt;INDEX(mots; 1);SI(nbMots > 1;GAUCHE(cleanStr;TROUVE(\"☃\";SUBSTITUE(cleanStr; \" \"; \"☃\"; nbMots - 1)) - 1);\"\"));lastPart; SI(contientEt;SI(nbMots >= 3;INDEX(mots; nbMots-2) & \" \" & INDEX(mots; nbMots-1) & \" \" & INDEX(mots; nbMots);cleanStr);SI(nbMots > 1;DROITE(cleanStr;NBCAR(cleanStr) - TROUVE(\"☃\";SUBSTITUE(cleanStr; \" \"; \"☃\"; nbMots - 1)));cleanStr));resultat1; RECHERCHEX(SUPPRESPACE(classPart); Trainers!$B:$B; Trainers!$C:$C; \"\");resultat2; RECHERCHEX(SUPPRESPACE(classPart); Trainers!$B:$B; Trainers!$C:$C; Trainers!$C$2);resultat3; RECHERCHEX(SUPPRESPACE(lastPart); Trainers!$B:$B; Trainers!$C:$C; Trainers!$C$2);SI(resultat1 <> \"\"; resultat2; resultat3))')
     return [formula]
+
+def calcMonNature(trainer, mon):
+    global trainerClassDefines
+    global speciesDefines
+    global trainerGenders
+    global natureDefines
+
+    trid = int(trainer.id)
+    trclass = int(trainerClassDefines.index(trainer.trainerclass))
+    trclassmale = not (trainerGenders[trainer.trainerclass] == "TRAINER_FEMALE")
+    pokeid = int(speciesDefines.index(mon.pokemon[0]))
+    level = int(mon.level)
+    dv = int(mon.dv)
+
+    return natureDefines[generate_pid(trid,trclass,trclassmale,pokeid,level,dv)%100%25]
+
+def generate_pid(trid, trclass, trclassmale, pokeid, level, dv):
+
+    rnd = trid + pokeid + level + dv
+    set_random(rnd)
+    
+    while trclass > 0:
+        rnd = random_num()
+        trclass -= 1
+        
+    rnd = (rnd >> 16) & 0xffff
+    rnd *= 256
+    rnd += 136 if trclassmale else 120
+
+    return int(rnd)
+
+seed = 0
+
+def set_random(new_seed):
+    global seed
+    seed = new_seed
+
+def random_num():
+    global seed
+    result = 0x41c64e6d * seed + 0x6073
+    seed = result & 0xffffffff
+    return result

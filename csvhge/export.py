@@ -1,6 +1,6 @@
 from typing import List
 from common.trainer import TrainerData, TrainerMon
-from common.resolve import ResolveMove, ResolveAbility, ResolveItem, ResolveBall, ResolveNature, ResolveStatus, ResolveTypes, ResolveNickname, ResolveTrainerClass
+from common.resolve import ResolveMove, ResolveAbility, ResolveItem, ResolveNature, ResolveStatus, ResolveNickname, ResolveTrainerClass
 from csvhge.validity_checker import CheckTrainerValidity
 
 def print_data(data: List[TrainerData], output_file: str):
@@ -39,11 +39,11 @@ def print_data(data: List[TrainerData], output_file: str):
             new_block.append(f"        ivs {mon.dv}\n")
             new_block.append(f"        abilityslot {mon.abilityslot}\n")
             new_block.append(f"        level {mon.level}\n")
-            mon.pokemon = ("SPECIES_"+mon.pokemon[0].upper(),mon.pokemon[1])
+            mon.pokemon = ("SPECIES_"+mon.pokemon[0].replace(' ','_').upper(),mon.pokemon[1])
             if mon.pokemon[1] != 0:         
                 new_block.append(f"        monwithform {mon.pokemon[0]}, {mon.pokemon[1]}\n")
             else:
-                new_block.append(f"        pokemon {mon.pokemon[0].upper()}\n")
+                new_block.append(f"        pokemon {mon.pokemon[0]}\n")
 
             if "TRAINER_DATA_TYPE_ITEMS" in trainer.trainermontype:
                 mon.item = ResolveItem(mon.item)
@@ -99,8 +99,8 @@ def print_data(data: List[TrainerData], output_file: str):
         
         new_block.append("    endparty\n")
 
-        try:
-            CheckTrainerValidity(trainer)
+
+        if CheckTrainerValidity(trainer):
 
             # Locate existing trainer block
             for i, line in enumerate(lines):
@@ -115,9 +115,7 @@ def print_data(data: List[TrainerData], output_file: str):
                 lines[start_idx:end_idx + 1] = new_block
             else:
                 lines.extend(["\n"] + new_block)
-            print(f"Inserted trainer : {trainer.name} with ID {trainer.id}")
-        except:
-            print(f"Invalid trainer : {trainer.name} with ID {trainer.id}")
+            #print(f"Inserted trainer : {trainer.name} with ID {trainer.id}")
 
     with open(output_file, 'w', encoding='utf-8') as f:
         f.writelines(lines)

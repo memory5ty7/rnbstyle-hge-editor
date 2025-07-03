@@ -2,7 +2,7 @@ import argparse
 from config import Config
 from hgecsv.s_parser import parse_s
 from hgecsv.export import print_data
-from hgecsv.mon_parser import parse_mons, mons
+from hgecsv.mon_parser import parse_mons
 
 def main():
     parser = argparse.ArgumentParser(description="Convert an hg-engine Trainers file to a correctly formatted Spreadsheet")

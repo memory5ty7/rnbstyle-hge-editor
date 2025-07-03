@@ -430,6 +430,9 @@ itemsReplacement = {
 }
 
 def ResolveItem(item):
+    
+    if item == "ITEM_NONE":
+        return item
 
     item = itemsReplacement.get(item, item).replace('-','_')
 
@@ -551,11 +554,11 @@ specialTrainerClasses = {
     "Will" : "TRAINERCLASS_ELITE_FOUR_WILL",
     "Karen" : "TRAINERCLASS_ELITE_FOUR_KAREN",
     "Koga" : "TRAINERCLASS_ELITE_FOUR_KOGA",
-    "Cheryl (Partner)" : "TRAINERCLASS_PKMN_TRAINER_CHERYL",
-    "Riley (Partner)" : "TRAINERCLASS_PKMN_TRAINER_RILEY",
-    "Buck (Partner)" : "TRAINERCLASS_PKMN_TRAINER_BUCK",
-    "Mira (Partner)" : "TRAINERCLASS_PKMN_TRAINER_MIRA",
-    "Marley (Partner)" : "TRAINERCLASS_PKMN_TRAINER_MARLEY",
+    "Cheryl" : "TRAINERCLASS_PKMN_TRAINER_CHERYL",
+    "Riley" : "TRAINERCLASS_PKMN_TRAINER_RILEY",
+    "Buck" : "TRAINERCLASS_PKMN_TRAINER_BUCK",
+    "Mira" : "TRAINERCLASS_PKMN_TRAINER_MIRA",
+    "Marley" : "TRAINERCLASS_PKMN_TRAINER_MARLEY",
     "Lucas" : "TRAINERCLASS_PKMN_TRAINER_FTR_LUCAS",
     "Dawn" : "TRAINERCLASS_PKMN_TRAINER_FTR_DAWN",
     "Palmer" : "TRAINERCLASS_TOWER_TYCOON",
@@ -565,7 +568,7 @@ specialTrainerClasses = {
     "Dahlia" : "TRAINERCLASS_ARCADE_STAR",
     "Darach" : "TRAINERCLASS_CASTLE_VALET",
     "Misty" : "TRAINERCLASS_LEADER_MISTY",
-    "Lt. Surge" : "TRAINERCLASS_LEADER_LT_SURGE",
+    "Surge" : "TRAINERCLASS_LEADER_LT_SURGE",
     "Erika" : "TRAINERCLASS_LEADER_ERIKA",
     "Janine" : "TRAINERCLASS_LEADER_JANINE",
     "Sabrina" : "TRAINERCLASS_LEADER_SABRINA",

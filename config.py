@@ -24,8 +24,11 @@ class Config:
     BATTLE_HEADER = INCLUDE_DIR + "battle.h"
     POKEMON_HEADER = INCLUDE_DIR + "pokemon.h"
 
-    
-    # Trainer Configuration
+    TRGENDER_FILE = ROOT_DIR + "src/pokemon.c"
+
+# -------------------------------------------------------------- 
+
+    # Spreadsheets to HG-Engine Configuration
 
     # Default Trainer AI Flags
     DEFAULT_AI_FLAGS = ["F_PRIORITIZE_SUPER_EFFECTIVE", "F_EVALUATE_ATTACKS", "F_EXPERT_ATTACKS"]
@@ -47,39 +50,31 @@ class Config:
     # Default Ball if there is no "Ball" row
     DEFAULT_BALL = "ITEM_POKE_BALL"
 
+# -------------------------------------------------------------- 
 
-    # hgecsv Configuration
+    # HG-Engine to Spreadsheets Configuration
     DEFAULT_INPUT_FILE = TRAINER_DIR + "trainers.s"
     DEFAULT_OUTPUT_FILE = "trainers.csv"
 
-    # Which rows to print if the corresponding row is present
+    # Which rows to print
     ROWS_TO_PRINT = {
-        "DV" : True,
-        "Ability Slot" : True,
         "Level" : True,
         "Pokémon" : True,
         "Held Item" : True,
         "Moves" : True,
-        "Ability" : True,
-        "Ball Type" : True,
-        "IVs" : True,
-        "EVs" : True,
+        "Ability" : True,           # This includes "Ability" or "Ability Slot"
+        "Ball Type" : False,
+        "IVs" : True,               # This includes "DVs" or "IVs"
+        "EVs" : False,
         "Nature" : True,
-        "Status" : True,
-        "Stats" : True,
-        "Nickname" : True,
-        "Ball Seal" : True,
+        "Status" : False,
+        "Stats" : False,
+        "Nickname" : False,
+        "Ball Seal" : False,
     }
 
-    # Print Ability instead of Ability Slot
-    PRINT_ABILITY_ABILITY_SLOT = True
+    # If set to True and if there is no "Ability" row, print the Ability instead of the Ability Slot
+    PRINT_ABILITY = True
 
-    # Print IVs instead of DVs
-    PRINT_IV_DV = True
-
-    # Print Moves when the moves are the default level-up ones
-    PRINT_MOVES_DEFAULT = True
-
-    # Print Nature even if there is no "Nature" row
-    PRINT_NATURE_DEFAULT = True
-    
+    # If set to True and if there is no "IVs" row, print the IVs instead of the DVs
+    PRINT_IVS = True
