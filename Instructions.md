@@ -272,6 +272,59 @@ Here are some useful shortcuts you might have to use :
 - CTRL+Shift+V to paste the values only (not the formatting)
 - CTRL+Alt+V to paste the formatting only (not the values)
 
+## Importing a Spreadsheet
+
+The tool can generate a .csv file from a initial trainers.s file. To import and format it nicely, here are the steps to follow :
+
+### 1. Importing the Sheet
+
+- Open your Copy of the the Sample Sheet on Google Sheets.
+- Hit File->Import and import the file from your Computer
+- Before Finalizing the import, select "Insert new sheets" and tick "Convert text to numbers, dates, and formulas.
+- Now press CTRL+H (or "Replace") and replace ```'=``` with ```=```. **Tick "Also search within formulas"** then click "Replace All". This will cause the formulas to refresh and show all the Pokémon and Trainer sprites.
+- Remove the I to Z columns by selecting them (or selecting the I row, then CTRL+Shift+Right) and choosing "remove columns I - Z"
+
+### 2. Formatting a Trainer
+
+- Go to an already formatted sheet and select the first rows of a Trainer
+
+![Select the first rows](png/Formatting%201.png)
+- Copy the formatting by pressing CTRL + C (or right click -> copy)
+- On your imported sheet, select the same number of rows and paste the formatting by using CTRL+Alt+V, you should get something like this :
+
+![Paste the Formatting](png/Formatting%203.png)
+
+- Copy and Paste the Moves by using the same technique explained above. You might still have some non-formatted rows left (in my case the "IVs" row is still in the wrong format):
+
+![Paste the Moves' Format](png/Formatting%204.png)
+
+- Copy the format of a row with the right color to the non-formatted rows (In my case I want my "IVs" row to be light-gray so I copy a light-gray row).
+
+![Complete the Rows' Formatting](png/Formatting%205.png)
+
+- Select the Trainer Sprite cell and the cells below it. Then click Format → Merge cells → Merge all.
+
+- Now your first Trainer is done and should look something like this :
+
+![Completed First Trainer](png/Formatting%206.png)
+
+
+### 3. Applying the Formatting to the Sheet
+
+- Select the Rows of your first formatted Trainer :
+
+![Select the First Trainer](png/Formatting%207.png)
+
+- Copy using CTRL+C (or Right Click -> Copy).
+
+- Select the whole Sheet (CTRL + A).
+
+- Paste the Format using CTRL + Alt + V (This can take a bit longer than the other steps depending on the number of Trainers on the sheet).
+
+- Every Trainer should now be in the correct format :
+
+![Every Trainer has the correct Format](png/Formatting%208.png)
+
 ## Inserting Trainers into the Game
 
 Download the Sheet you want in .csv format in place it in the .csv folder of rnbstyle-hge-editor. The file you get should be quite similar to the [Example File](csv/Example.csv). The tool will read **every CSV file in that folder**.

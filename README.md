@@ -26,11 +26,21 @@ You should now have ```folder/hg-engine``` and ```folder/rnbstyle-hge-editor```
 
 5. Once the modifications are done, download the Sheet you want as a .csv and place it in the [csv subfolder](csv) of rnbstyle-hge-editor.
 
-6. Run [csvhge.py](csvhge.py) to transfer the changes to the assembly file used by hg-engine
+6. Run [tohge.py](tohge.py) to transfer the changes to the assembly file used by hg-engine
 
 7. Build your ROM using hg-engine, the modified trainers are now in the game.
 
 ## From HG-Engine to Spreadsheets
+
+3. Create a copy of the [Run and Bun-Style Sample Sheet](https://docs.google.com/spreadsheets/d/1QQ9A7cZD-ivIZ9QNOgbUV2toyaC7QJ42lxEYZk_odos/edit?usp=sharing) on your Google Drive account.
+
+4. Run [tocsv.py](tocsv.py) and specify the parameters :
+- input file, mandatory
+- ```-o``` or ```-output``` : output file, optional
+
+5. Import the .csv file to your copy of the Sample Sheet
+
+6. Format the obtained sheet following the [Import Instructions](Instructions.md#importing-a-spreadsheet)
 
 ## Features
 

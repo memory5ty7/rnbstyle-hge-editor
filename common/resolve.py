@@ -194,7 +194,7 @@ forms = {
     "Rapidash-G" : ("Rapidash", 1),
     "Slowpoke-G" : ("Slowpoke", 1),
     "Slowbro-G" : ("Slowbro", 2),
-    "Farfetch'd-G" : ("Farfetch'd", 1),
+    "Farfetch'd-G" : ("Farfetchd", 1),
     "Weezing-G" : ("Weezing", 1),
     "Mr. Mime-G" : ("Mr. Mime", 1),
     "Articuno-G" : ("Articuno", 1),
@@ -385,9 +385,9 @@ def ResolvePokemonToCSV(mon, item, shinylock):
 
 movesReplacement = {
     "Vise Grip" : "Vice Grip",
-    "Forest’s Curse" : "Forests Curse",
-    "King’s Shield" : "Kings Shield",
-    "Land’s Wrath" : "Lands Wrath",
+    "Forest's Curse" : "Forests Curse",
+    "King's Shield" : "Kings Shield",
+    "Land's Wrath" : "Lands Wrath",
 }
     
 def ResolveMove(move):
@@ -425,7 +425,7 @@ def ResolveAbilityToCSV(ability):
     return ability.replace("ABILITY_","").replace("_"," ").title()
 
 itemsReplacement = {
-    "King’s Rock" : "Kings Rock",
+    "King's Rock" : "Kings Rock",
     "Poké Ball" : "Poke Ball"
 }
 
