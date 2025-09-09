@@ -210,7 +210,7 @@ def getMonFormula(row, cols):
     for col in cols:
         cell = int_to_letter(col) + str(row)
         formula = (
-            f'\'=SIERREUR(SI(DROITE({cell};1)=\"\";'
+            f'\'=SIERREUR(SI(DROITE({cell};1)=\"*\";'
             f'INDEX(\'Pokémon\'!$C:$C; EQUIV(VRAI; INDEX(MINUSCULE(\'Pokémon\'!$A:$A)=MINUSCULE(GAUCHE({cell};NBCAR({cell})-1)); 0); 0));'
             f'INDEX(\'Pokémon\'!$B:$B; EQUIV(VRAI; INDEX(MINUSCULE(\'Pokémon\'!$A:$A)=MINUSCULE({cell}); 0); 0)));'
             f'SI(ESTTEXTE({cell}); \'Pokémon\'!$B$2; \"\"))'
