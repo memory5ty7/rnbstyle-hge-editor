@@ -284,6 +284,12 @@ megas = {
     "Charizard-M-Y" : ("Charizard", 2),
     "Mewtwo-M-X" : ("Mewtwo", 1),
     "Mewtwo-M-Y" : ("Mewtwo", 2),
+
+    "Raichu-M-X" : ("Raichu", 1),
+    "Raichu-M-Y" : ("Raichu", 2),
+    "Absol-M-Z" : ("Absol", 2),
+    "Garchomp-M-Z" : ("Garchomp", 2),
+
 }
 
 megaStones = {
@@ -333,6 +339,55 @@ megaStones = {
     ("Gallade", 1) : "Galladite",
     ("Audino", 1) : "Audinite",
     ("Diancie", 1) : "Diancite",
+
+    ("Raichu", 1) : "Raichunite X",
+    ("Raichu", 2) : "Raichunite Y",
+    ("Clefable", 1) : "Clefablite",
+    ("Victreebel", 1) : "Victreebelite",
+    ("Starmie", 1) : "Starminite",
+    ("Dragonite", 1) : "Dragoninite",
+    ("Meganium", 1) : "Meganiumite",
+    ("Feraligatr", 1) : "Feraligite",
+    ("Skarmory", 1) : "Skarmorite",
+    ("Chimecho", 1) : "Chimechite",
+    ("Absol", 2) : "Absolite Z",
+    ("Staraptor", 1) : "Staraptite",
+    ("Garchomp", 2) : "Garchompite Z",
+    ("Lucario", 2) : "Lucarionite Z",
+    ("Froslass", 1) : "Froslassite",
+    ("Heatran", 1) : "Heatranite",
+    ("Darkrai", 1) : "Darkranite",
+    ("Emboar", 1) : "Emboarite",
+    ("Excadrill", 1) : "Excadrite",
+    ("Scolipede", 1) : "Scolipite",
+    ("Scrafty", 1) : "Scraftinite",
+    ("Eelektross", 1) : "Eelektrossite",
+    ("Chandelure", 1) : "Chandelurite",
+    ("Golurk", 1) : "Golurkite",
+    ("Chesnaught", 1) : "Chesnaughtite",
+    ("Delphox", 1) : "Delphoxite",
+    ("Greninja", 1) : "Greninjite",
+    ("Pyroar", 1) : "Pyroarite",
+    ("Floette", 6) : "Floettite",
+    ("Meowstic", 1) : "Meowsticite",
+    ("Malamar", 1) : "Malamarite",
+    ("Barbaracle", 1) : "Barbaracite",
+    ("Dragalge", 1) : "Dragalgite",
+    ("Hawlucha", 1) : "Hawluchanite",
+    ("Zygarde", 6) : "Zygardite",
+    ("Crabominable", 1) : "Crabominite",
+    ("Golisopod", 1) : "Golisopite",
+    ("Drampa", 1) : "Drampanite",
+    ("Magearna", 2) : "Magearnite",
+    ("Magearna", 3) : "Magearnite",
+    ("Zeraora", 1) : "Zeraorite",
+    ("Falinks", 1) : "Falinksite",
+    ("Scovillain", 1) : "Scovillainite",
+    ("Glimmora", 1) : "Glimmoranite",
+    ("Tatsugiri", 3) : "Tatsugirinite",
+    ("Tatsugiri-Droopy", 4) : "Tatsugirinite",
+    ("Tatsugiri-Stretchy", 5) : "Tatsugirinite",
+    ("Baxcalibur", 1) : "Glimmoranite",
 }
 
 specialMegaStones = {
@@ -342,6 +397,11 @@ specialMegaStones = {
     ("Mewtwo", "Mewtwonite Y") : "Mewtwo-M-Y",
     ("Groudon", "Red Orb") : "Groudon-P",
     ("Kyogre", "Blue Orb") : "Kyogre-P",
+
+    ("Raichu", "Raichunite X") : "Raichu-M-X",
+    ("Raichu", "Raichunite Y") : "Raichu-M-Y",
+    ("Absol", "Absolite Z") : "Absol-M-Z",
+    ("Garchomp", "Garchompite Z") : "Garchomp-M-Z",
 }
 
 def ResolvePokemon(cell):
@@ -349,15 +409,15 @@ def ResolvePokemon(cell):
 
     pokemon = speciesReplacement.get(cell, pokemon)
 
-    if pokemon[0].endswith("-M") and pokemon[0] != "Unown":
+    # Handle Primals
+    if pokemon[0] == "Groudon-P" or pokemon[0] == "Kyogre-P" or pokemon[0] == "Rayquaza-M":
+        return (pokemon[0][:-2], 0)
+    
+    if pokemon[0].endswith("-M") and pokemon[0] != "Unown-M" and pokemon[0] != "Necrozma-D-M":
         return (pokemon[0][:-2], 1)
     
     # Handle Megas
     pokemon = megas.get(pokemon[0], pokemon)
-    
-    # Handle Primals
-    if pokemon[0].endswith("-P"):
-        return (pokemon[0], 1)
 
     return forms.get(pokemon[0], pokemon)
 
@@ -388,12 +448,16 @@ movesReplacement = {
     "Forest's Curse" : "Forests Curse",
     "King's Shield" : "Kings Shield",
     "Land's Wrath" : "Lands Wrath",
+    "Nature's Madness" : "Natures Madness",
 }
     
 def ResolveMove(move):
 
     if(move == "MOVE_NONE"):
         return move
+    
+    if move.startswith("HP ("):
+        move = "Hidden Power"
 
     move = movesReplacement.get(move, move)
 
@@ -410,7 +474,7 @@ def ResolveMoveToCSV(move):
     return move
 
 abilitiesReplacement = {
-    "Dragon’s Maw" : "Dragons Maw",
+    "Dragon's Maw" : "Dragons Maw",
     "As One (Glastrier)" : "As One Glastrier",
     "As One (Spectrier)" : "As One Spectrier",
 }
@@ -586,6 +650,9 @@ specialTrainerClasses = {
     "Dawn DP" : "TRAINERCLASS_PKMN_TRAINER_DAWN_DP",
     "Lucas PT" : "TRAINERCLASS_PKMN_TRAINER_LUCAS_PT",
     "Dawn PT" : "TRAINERCLASS_PKMN_TRAINER_DAWN_PT",
+    "Silver" : "TRAINERCLASS_RIVAL",
+    "Rocket♂" : "TRAINERCLASS_TEAM_ROCKET",
+    "Rocket♀" : "TRAINERCLASS_TEAM_ROCKET_F",
 }
 
 regularTrainerClasses = {
@@ -647,7 +714,7 @@ trainerClassesToCSV = {
     "Team Rocket F" : "Rocket Grunt♀",
     "Poke Maniac" : "Poké Maniac",
     "Bird Keeper Gs" : "Bird Keeper",
-    "Scientist Gs" : "Scientist",  
+    "Scientist Gs" : "Scientist",
 }
 
 def ResolveTrainerClass(trclass, trname):
@@ -691,3 +758,32 @@ def ResolvePPCount(cell):
         move = cell
 
     return move, ppcount
+
+hiddenPowerTable = {
+    "Fire" : [31,30,31,30,30,31],
+    "Ice" : [31,30,30,31,31,31],
+    "Grass" : [31,30,31,31,30,31],
+    "Ground" : [31,31,31,31,30,30],
+    "Fighting" : [31,31,30,30,30,30],
+    "Water" : [31,31,31,30,30,31],
+    "Electric" : [31,31,31,31,30,31],
+    "Poison" : {31,31,30,31,30,30},
+    "Flying" : [31,31,31,30,30,30],
+    "Psychic" : [31,30,31,30,31,31],
+    "Bug" : [31,31,31,30,31,30],
+    "Rock" : [31,31,30,30,31,30],
+    "Ghost" : [31,31,30,31,31,30],
+    "Dragon" : [31,30,31,31,31,31],
+    "Dark" : [31,31,31,31,31,31],
+    "Steel" : [31,31,31,31,31,30]
+}
+
+def ResolveHiddenPower(cell, setivs, trainermontype):
+    
+    match = re.search(r"^HP \((.*)\)$", cell)
+    if match:
+        type = match.group(1)
+        trainermontype.add("TRAINER_DATA_TYPE_IV_EV_SET")
+        return "Hidden Power", hiddenPowerTable[type], trainermontype
+    else:
+        return cell, setivs, trainermontype

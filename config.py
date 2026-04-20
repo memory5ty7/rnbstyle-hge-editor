@@ -30,6 +30,10 @@ class Config:
 
     # Spreadsheets to HG-Engine Configuration
 
+    # Use defined order to parse the csv files if True, in alphabetical order if False
+    USE_CSV_ORDER = False
+    csv_order = []
+
     # Default Trainer AI Flags
     DEFAULT_AI_FLAGS = ["F_PRIORITIZE_SUPER_EFFECTIVE", "F_EVALUATE_ATTACKS", "F_EXPERT_ATTACKS"]
 

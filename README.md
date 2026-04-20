@@ -97,3 +97,6 @@ Blaquaza, KingOfThe-X-Roads, KattenK, Travis, G.E.Z., SpheX, Hematite, SelenaArm
 JordanosArt, Abnayami, OldSoulja, Katten, Divaruta 666, Clara, Skyflyer, AshnixsLaw, ace_stryfe
 * **Gen 9 Vanilla style sprites** - KingOfThe-X-Roads, Mak, Caruban, jinxed, leParagon, Sopita_Yorita, Azria, Mashirosakura, JordanosArt, Scept, NanaelJustice, SoyChim, KRLW890, AnonAlpaca, PokeJminer, Red7246, Carmanekko, Eduar, Lykeron, GriloKapu10, Mesayas, Erkey830, QDylm, PorousMist, OldSoulja, AlexandreV2.0, Z-nogyroP, lennybitao, Ruben1986, GRAFAIAIMX
 Blaquaza, KattenK, Travis, G.E.Z., SpheX, Hematite
+* **Legends ZA Sprites** - Kyle-Dove, RetroNC
+
+If I used your sprite and you do not appear in the credits, this is a mistake and is not intentional. Let me know and I will add you to the list.
